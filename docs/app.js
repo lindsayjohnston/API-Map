@@ -20,8 +20,11 @@ let service;
 let infoWindow;
 
 //LISTEN FOR CLICK TO RUN PROGRAM
-document.getElementById('get-map').addEventListener('click', getChosenLatLng);
-document.getElementById('city-input').addEventListener('keydown', guessCity);
+// document.getElementById('get-map').addEventListener('click', getChosenLatLng);
+// // document.getElementById('city-input').addEventListener('keydown', guessCity);
+
+//TEMP CLICKS FOR TESTING
+document.getElementById('get-map').addEventListener('click', testNearbyCities);
 
 //ADD SCRIPT ONLOAD
 
@@ -101,12 +104,8 @@ function getChosenLatLng() {
             verifiedCities.push(chosenCity + " " + chosenState);
             pushLatLng(array);
         })
-
         checkChosenLatLng();
-
     }
-
-
 }
 
 function checkChosenLatLng() {
@@ -127,53 +126,53 @@ function getCityBBCoordinates() {
     cityBB['east'] = longitude + 4;
     cityBB['west'] = longitude - 4;
 
-    getNearbyCities(cityBB);
+    // getNearbyCities(cityBB);
+    testNearbyCities(cityBB);
 }
+
+//TEST GETNEARBYCITIES
+
+async function testNearbyCities(bb){
+    console.log("in testNearbyCities");
+    try{
+        // const citiesURL= `/nearby/cityBBwithCommas`
+        let bb= `${bb.north},${bb.south},${bb.west},${bb.east}`
+        const citiesURL= `/nearby/${bb}`;
+        const response= await fetch(citiesURL);
+        const json= await response.json();
+        console.log(json);
+    } catch (error){
+        console.log(error);
+    }
+}
+
 
 function getNearbyCities(bb) {
     addSpinner(document.getElementById('message'), "Fetching nearby cities with GeoNames API.");
-    const geoNames = new GeoNames;
-    geoNames.getNearbyCities(bb)
-        .then(data => {
-            if (data.status !== undefined) {
-                alert('There was a problem with the GeoNames server and we will use dummy data surrounding Yakima, WA to run the App. Sorry about that!');
-                citiesArray = ["Yakima WA", "Kennewick WA", "Tacoma WA", 'Seattle WA', 'Richland WA', "Walla Walla WA", 'Yakima WA'];
-                usingDummyData = true;
-                document.getElementById('city-input').value = "Seattle, WA, USA"
-                geoCodeTally = 0;
-                chosenCity = 'Seattle';
-                chosenState = 'WA';
-                citiesLatLng = [];
-                verifiedCities = [];
-            } else {
-                data.geonames.forEach(cityInfo => {
-                    //populate citiesarray with wikipedia search name from Geonames wiki
-                    //EX: en.wikipedia.org/wiki/Tacoma%2C_Washington
-                    //EX: en.wikipedia.org/wiki/Seattle
-                    let cityName;
-                    let cityStateWiki = cityInfo.wikipedia;
-                    if (cityStateWiki !== "") {
-                        let wikiArray = cityStateWiki.split('/');
-                        let cityURLFormat = wikiArray[2];
-                        let cityNameArray1 = cityURLFormat.split("%2C_"); //get rid of %2C
-                        let cityNameArray2 = []; //get rid of _
-                        cityNameArray1.forEach(word => {
-                            let wordArray = word.split('_');
-                            wordArray.forEach(smallWord => {
-                                cityNameArray2.push(smallWord);
-                            })
-                        })
-                        cityName = cityNameArray2.join(" ");
-
-                    } else {
-                        cityName = cityInfo.name;
-                    }
-                    citiesArray.push(cityName);
-                });
-            }
-        });
+    
     checkNearbyCities();
 }
+//////TEST SERVER 
+let city= "seattle";
+
+///GET NUMBER OF GITHUB USERS
+async function test() {
+    try {
+        const api_url = `/users/${city}`;
+        const response = await fetch(api_url);
+        const json = await response.json();
+        console.log(json.total_count);
+
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+test();
+
+
+
+
 
 function checkNearbyCities() {
     //citiesArray.length should match number of rows requested from GeoNames API + 1 for chosen City
