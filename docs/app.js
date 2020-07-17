@@ -136,7 +136,7 @@ async function testNearbyCities(bb){
     console.log("in testNearbyCities");
     try{
         // const citiesURL= `/nearby/cityBBwithCommas`
-        let bb= `${bb.north},${bb.south},${bb.west},${bb.east}`
+        let bbCommas= `${bb.north},${bb.south},${bb.west},${bb.east}`
         const citiesURL= `/nearby/${bb}`;
         const response= await fetch(citiesURL);
         const json= await response.json();
