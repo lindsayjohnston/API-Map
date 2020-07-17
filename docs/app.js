@@ -21,7 +21,7 @@ let infoWindow;
 
 //LISTEN FOR CLICK TO RUN PROGRAM
 // document.getElementById('get-map').addEventListener('click', getChosenLatLng);
-// // document.getElementById('city-input').addEventListener('keydown', guessCity);
+document.getElementById('city-input').addEventListener('keydown', guessCity);
 
 //TEMP CLICKS FOR TESTING
 document.getElementById('get-map').addEventListener('click', testNearbyCities);
