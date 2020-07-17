@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="style.css">
+  <title>GitHub User Map</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+    integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+</head>
+
+<body>
+  <div id="header" >
+    <h1>GitHub User Map</h1>
+    <p id="description">Find cities with the largest number of GitHub users near a city of your choice...</p>
+  </div>
+
+  <div id="main">
+    <div id="input-div">
+      <input type="text" id="city-input" placeholder="Enter US City">
+      <button id="get-map">Get Map of GitHub Users</button>
+    </div>
+  
+      <!-- ALERTS FOR WHEN STEPS ARE COMPLETING -->
+      <div id="alerts">
+        <div id="message"></div>
+      </div>
+  
+      <!-- MAP DISPLAY -->
+      <div id='map-div'>
+        <p id='marker-explanation'></p>
+        <div id="map"></div>
+      </div>
+
+  </div>
+  
+    <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBFUCjOQSGpajfppXW2jTLR0GVEwc6qaMo&libraries=places'></script>
+    <!-- <script id="userlist-script" src="api.js"></script> -->
+    <script id="app-js" src="app.js"></script>
+
+</body>
+
+</html>
