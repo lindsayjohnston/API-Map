@@ -132,11 +132,11 @@ function getCityBBCoordinates() {
 
 //TEST GETNEARBYCITIES
 
-async function testNearbyCities(bb){
+async function testNearbyCities(){
     console.log("in testNearbyCities");
     try{
         // const citiesURL= `/nearby/cityBBwithCommas`
-        let bbCommas= `${bb.north},${bb.south},${bb.west},${bb.east}`
+        let bbCommas= `45,44,45,44`;
         const citiesURL= `/nearby/${bbCommas}`;
         const response= await fetch(citiesURL);
         // const json= await response.json();
