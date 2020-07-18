@@ -137,7 +137,7 @@ async function testNearbyCities(){
     try{
         // const citiesURL= `/nearby/cityBBwithCommas`
         let bbCommas= `45,44,45,44`;
-        const citiesURL= `/nearby`;
+        const citiesURL= `/nearby/${bbCommas}`;
         const response= await fetch(citiesURL);
         const json= await response.json();
         console.log(json);
