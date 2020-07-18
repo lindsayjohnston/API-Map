@@ -14,7 +14,7 @@ app.listen(port, ()=>{
 });
 
 app.get('/nearby', async(request, response) =>{
-    console.log("request.params");
+    // console.log("request.params");
     // const bb= request.params.bb.split(',');
     // console.log(bb);
     // const north= bb[0];
