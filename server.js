@@ -22,13 +22,13 @@ app.get('/nearby/:bb', async(request, response) =>{
     const east= bb[2];
     const west= bb[3];
     console.log(north, south, east, west);
-    const geonamesUsername= process.env.GEONAMES_USERNAME;
+    const geonamesUsername= `githubmapmap`;
     const geonames_url=`http://api.geonames.org/citiesJSON?north=${north}&south=${south}&west=${west}&east=${east}&maxRows=9&username=${geonamesUsername}`;
     // const geonames_url=`http://api.geonames.org/citiesJSON?north=45&south=44&west=44&east=45&maxRows=9&username=githubmapmap`;
     console.log(geonames_url);
     const fetch_response= await fetch(geonames_url);
     const json= await fetch_response.json();
-    response.json(`${json} This is the username: ${geonamesUsername}`);
+    response.json(json + `This is the username: ${geonamesUsername}`);
 })
 
 app.get('/users/:city', async(request, response) =>{
