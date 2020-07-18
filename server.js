@@ -7,6 +7,7 @@ app.use(express.static('docs'));
 app.use(express.json({limit: '1mb'}));
 
 const port= process.env.PORT || 3000;
+const geonamesUsername= process.env.GEONAMES_USERNAME;
 
 app.listen(port, ()=>{
     console.log(`Server is running on port ${port}.`);
@@ -21,7 +22,7 @@ app.get('/nearby/:bb', async(request, response) =>{
     const east= bb[2];
     const west= bb[3];
     console.log(north, south, east, west);
-    const geonames_url=`http://api.geonames.org/citiesJSON?north=${north}&south=${south}&west=${west}&east=${east}&maxRows=9&username=githubmapmap`;
+    const geonames_url=`http://api.geonames.org/citiesJSON?north=${north}&south=${south}&west=${west}&east=${east}&maxRows=9&username=${geonamesUsername}`;
     console.log(geonames_url);
     const fetch_response= await fetch(geonames_url);
     const json= await fetch_response.json();
