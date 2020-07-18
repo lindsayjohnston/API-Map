@@ -15,16 +15,18 @@ app.listen(port, ()=>{
 });
 
 app.get('/nearby/:bb', async(request, response) =>{
-    console.log("request.params");
+    console.log(request.params);
     const bb= request.params.bb.split(',');
     console.log(bb);
     const north= bb[0];
     const south= bb[1];
-    const east= bb[2];
-    const west= bb[3];
+    const west= bb[2];
+    const east= bb[3];
+    
     console.log(north, south, east, west);
-    const geonamesUsername= process.env.GEONAMES_USERNAME;
     const geonames_url=`http://api.geonames.org/citiesJSON?north=${north}&south=${south}&west=${west}&east=${east}&maxRows=9&username=${process.env.GEONAMES_USERNAME}`;
+    //SEATTLE EXAMPLE:
+    // http://api.geonames.org/citiesJSON?north=50.1&south=45.1&west=-126&east=-118&maxRows=9&username=githubmapmap
     // const geonames_url=`http://api.geonames.org/citiesJSON?north=45&south=44&west=44&east=45&maxRows=9&username=githubmapmap`;
     console.log(geonames_url);
     const fetch_response= await fetch(geonames_url);

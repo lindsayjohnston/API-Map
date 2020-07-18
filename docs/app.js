@@ -20,11 +20,11 @@ let service;
 let infoWindow;
 
 //LISTEN FOR CLICK TO RUN PROGRAM
-// document.getElementById('get-map').addEventListener('click', getChosenLatLng);
+document.getElementById('get-map').addEventListener('click', getChosenLatLng);
 document.getElementById('city-input').addEventListener('keydown', guessCity);
 
 //TEMP CLICKS FOR TESTING
-document.getElementById('get-map').addEventListener('click', testNearbyCities);
+// document.getElementById('get-map').addEventListener('click', testNearbyCities);
 
 //ADD SCRIPT ONLOAD
 
@@ -126,17 +126,19 @@ function getCityBBCoordinates() {
     cityBB['east'] = longitude + 4;
     cityBB['west'] = longitude - 4;
 
+    console.log(cityBB);
     // getNearbyCities(cityBB);
     testNearbyCities(cityBB);
 }
 
 //TEST GETNEARBYCITIES
 
-async function testNearbyCities(){
+async function testNearbyCities(bb){
+
     console.log("in testNearbyCities");
     try{
         // const citiesURL= `/nearby/cityBBwithCommas`
-        let bbCommas= `45,44,45,44`;
+        let bbCommas= `${bb.north},${bb.south},${bb.west},${bb.east}`;
         const citiesURL= `/nearby/${bbCommas}`;
         const response= await fetch(citiesURL);
         const json= await response.json();
