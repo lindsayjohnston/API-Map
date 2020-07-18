@@ -27,7 +27,7 @@ app.get('/nearby', async(request, response) =>{
     console.log(geonames_url);
     const fetch_response= await fetch(geonames_url);
     const json= await fetch_response.json();
-    response.append('Warning', `http://api.geonames.org/citiesJSON?north=${north}&south=${south}&west=${west}&east=${east}&maxRows=9&username=${geonamesUsername}`);
+    response.json(json);
 })
 
 app.get('/users/:city', async(request, response) =>{
