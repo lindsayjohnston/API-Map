@@ -24,7 +24,7 @@ app.get('/nearby/:bb', async(request, response) =>{
     const west= bb[3];
     console.log(north, south, east, west);
     const geonamesUsername= process.env.GEONAMES_USERNAME;
-    const geonames_url=`http://api.geonames.org/citiesJSON?north=${north}&south=${south}&west=${west}&east=${east}&maxRows=9&username=${geonamesUsername}`;
+    const geonames_url=`http://api.geonames.org/citiesJSON?north=${north}&south=${south}&west=${west}&east=${east}&maxRows=9&username=${process.env.GEONAMES_USERNAME}`;
     // const geonames_url=`http://api.geonames.org/citiesJSON?north=45&south=44&west=44&east=45&maxRows=9&username=githubmapmap`;
     console.log(geonames_url);
     const fetch_response= await fetch(geonames_url);
