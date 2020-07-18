@@ -13,7 +13,7 @@ app.listen(port, ()=>{
     console.log(`Server is running on port ${port}.`);
 });
 
-app.get('/nearby/:bb', async(request, response) =>{
+app.get('/nearby', async(request, response) =>{
     console.log("request.params");
     // const bb= request.params.bb.split(',');
     // console.log(bb);
