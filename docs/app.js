@@ -126,7 +126,6 @@ function getCityBBCoordinates() {
     cityBB['east'] = longitude + 4;
     cityBB['west'] = longitude - 4;
 
-    console.log(cityBB);
     // getNearbyCities(cityBB);
     testNearbyCities(cityBB);
 }
@@ -183,11 +182,11 @@ async function testNearbyCities(bb){
 }
 
 
-function getNearbyCities(bb) {
-    addSpinner(document.getElementById('message'), "Fetching nearby cities with GeoNames API.");
+// function getNearbyCities(bb) {
+//     addSpinner(document.getElementById('message'), "Fetching nearby cities with GeoNames API.");
     
-    checkNearbyCities();
-}
+//     checkNearbyCities();
+// }
 
 function checkNearbyCities() {
     //citiesArray.length should match number of rows requested from GeoNames API + 1 for chosen City
@@ -277,7 +276,7 @@ function deleteCityDuplicates() {
 }
 
 //////TEST SERVER 
-let city= "seattle";
+
 
 ///GET NUMBER OF GITHUB USERS
 // async function test() {
@@ -330,7 +329,7 @@ async function test(city, latLngIndex, cityNameForURL) {
         console.log(json.total_count);
 
         if(json.total_count === undefined){
-            test(cityNameForURL);
+            test(city, latLngIndex, cityNameForURL);
         } else {
             gitHubNumbersArray.push([city, latLngIndex, json.total_count]);
         }
@@ -358,7 +357,7 @@ function getTop5(array) {
     //make sure chosen city is displayed
     let chosenIndex;
     array.forEach((cityArray, index) => {
-        if (cityArray[0] === chosenCity + " " + chosenState) {
+        if (cityArray[index] === chosenCity + " " + chosenState) {
             top5.push(cityArray);
             chosenIndex = index;
         }
