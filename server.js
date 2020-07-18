@@ -28,7 +28,7 @@ app.get('/nearby/:bb', async(request, response) =>{
     console.log(geonames_url);
     const fetch_response= await fetch(geonames_url);
     const json= await fetch_response.json();
-    response.json(json + `This is the username: ${geonamesUsername}`);
+    response.json(json + `This is the GEONAMES_USERNAME: ${process.env.GEONAMES_USERNAME}`);
 })
 
 app.get('/users/:city', async(request, response) =>{
