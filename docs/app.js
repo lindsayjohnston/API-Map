@@ -134,18 +134,52 @@ function getCityBBCoordinates() {
 //TEST GETNEARBYCITIES
 
 async function testNearbyCities(bb){
-
-    console.log("in testNearbyCities");
+    addSpinner(document.getElementById('message'), "Fetching nearby cities with GeoNames API.");
     try{
-        // const citiesURL= `/nearby/cityBBwithCommas`
         let bbCommas= `${bb.north},${bb.south},${bb.west},${bb.east}`;
         const citiesURL= `/nearby/${bbCommas}`;
         const response= await fetch(citiesURL);
         const json= await response.json();
-        console.log(json);
+        if (json.status !== undefined) {
+            alert('There was a problem with the GeoNames server and we will use dummy data surrounding Yakima, WA to run the App. Sorry about that!');
+            citiesArray = ["Yakima WA", "Kennewick WA", "Tacoma WA", 'Seattle WA', 'Richland WA', "Walla Walla WA", 'Yakima WA'];
+            usingDummyData = true;
+            document.getElementById('city-input').value = "Seattle, WA, USA"
+            geoCodeTally = 0;
+            chosenCity = 'Seattle';
+            chosenState = 'WA';
+            citiesLatLng = [];
+            verifiedCities = [];
+        } else {
+            json.geonames.forEach(cityInfo => {
+                //populate citiesarray with wikipedia search name from Geonames wiki
+                //EX: en.wikipedia.org/wiki/Tacoma%2C_Washington
+                //EX: en.wikipedia.org/wiki/Seattle
+                let cityName;
+                let cityStateWiki = cityInfo.wikipedia;
+                if (cityStateWiki !== "") {
+                    let wikiArray = cityStateWiki.split('/');
+                    let cityURLFormat = wikiArray[2];
+                    let cityNameArray1 = cityURLFormat.split("%2C_"); //get rid of %2C
+                    let cityNameArray2 = []; //get rid of _
+                    cityNameArray1.forEach(word => {
+                        let wordArray = word.split('_');
+                        wordArray.forEach(smallWord => {
+                            cityNameArray2.push(smallWord);
+                        })
+                    })
+                    cityName = cityNameArray2.join(" ");
+
+                } else {
+                    cityName = cityInfo.name;
+                }
+                citiesArray.push(cityName);
+            });
+        }
     } catch (error){
         console.log(error);
     }
+    checkNearbyCities();
 }
 
 
@@ -154,27 +188,6 @@ function getNearbyCities(bb) {
     
     checkNearbyCities();
 }
-//////TEST SERVER 
-let city= "seattle";
-
-///GET NUMBER OF GITHUB USERS
-async function test() {
-    try {
-        const api_url = `/users/${city}`;
-        const response = await fetch(api_url);
-        const json = await response.json();
-        console.log(json.total_count);
-
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-test();
-
-
-
-
 
 function checkNearbyCities() {
     //citiesArray.length should match number of rows requested from GeoNames API + 1 for chosen City
@@ -263,29 +276,67 @@ function deleteCityDuplicates() {
     getGitHubUsers();
 }
 
+//////TEST SERVER 
+let city= "seattle";
+
+///GET NUMBER OF GITHUB USERS
+// async function test() {
+//     try {
+//         const api_url = `/users/${city}`;
+//         const response = await fetch(api_url);
+//         const json = await response.json();
+//         console.log(json.total_count);
+
+//     } catch (error) {
+//         console.log(error);
+//     }
+// };
+
+// test();
+
 function getGitHubUsers() {
     addCheck(document.getElementById('message'));
     addSpinner(document.getElementById('message'), "Fetching numbers of GitHub Users with GitHub API.");
-    const github = new GitHub;
     verifiedCities.forEach((city, index) => {
         let cityNameForURL;
         //Change City Name to URL format
         let cityNameArray = city.split(" ");
         cityNameArray.forEach(function (word, index) {
             if (index === 0) {
-                cityNameForURL = word;
+                cityNameForURL = `"`+ word;
+            } else if(index !== cityNameArray.length -1){
+                cityNameForURL+= "+" + word;
             } else {
-                cityNameForURL += "+" + word;
+                cityNameForURL += '"+location%3A' + word;
             }
         })
+    
+        test(city, citiesLatLng[index], cityNameForURL);
 
-        github.getUsersInLocation(cityNameForURL)
-            .then(data => {
-                gitHubNumbersArray.push([city, citiesLatLng[index], data.location.total_count]);
-            })
+        // github.getUsersInLocation(cityNameForURL)
+        //     .then(data => {
+        //         gitHubNumbersArray.push([city, citiesLatLng[index], data.location.total_count]);
+        //     })
 
     })
     checkGitHub();
+};
+
+async function test(city, latLngIndex, cityNameForURL) {
+    try {
+        const api_url = `/users/${cityNameForURL}`;
+        const response = await fetch(api_url);
+        const json = await response.json();
+        console.log(json.total_count);
+
+        if(json.total_count === undefined){
+            test(cityNameForURL);
+        } else {
+            gitHubNumbersArray.push([city, latLngIndex, json.total_count]);
+        }
+    } catch (error) {
+        console.log(error);
+    }
 };
 
 //GET NUMBER OF GITHUB USERS FOR EACH VERIFIED CITY
@@ -301,6 +352,8 @@ function checkGitHub() {
 //FIND TOP 5 CITIES BY HIGHEST NUMBER OF GITHUB USERS
 function getTop5(array) {
     ///array is [[city, {lat: lng: }, #], ....]
+    console.log("verified cities array before top 5: ");
+    console.log(array);
     let top5 = [];
     //make sure chosen city is displayed
     let chosenIndex;
@@ -325,6 +378,7 @@ function getTop5(array) {
             }
         }
     }
+    console.log(top5);
     getMap(top5);
 }
 

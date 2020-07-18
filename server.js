@@ -15,20 +15,16 @@ app.listen(port, ()=>{
 });
 
 app.get('/nearby/:bb', async(request, response) =>{
-    console.log(request.params);
     const bb= request.params.bb.split(',');
-    console.log(bb);
     const north= bb[0];
     const south= bb[1];
     const west= bb[2];
     const east= bb[3];
     
-    console.log(north, south, east, west);
     const geonames_url=`http://api.geonames.org/citiesJSON?north=${north}&south=${south}&west=${west}&east=${east}&maxRows=9&username=${process.env.GEONAMES_USERNAME}`;
     //SEATTLE EXAMPLE:
     // http://api.geonames.org/citiesJSON?north=50.1&south=45.1&west=-126&east=-118&maxRows=9&username=githubmapmap
-    // const geonames_url=`http://api.geonames.org/citiesJSON?north=45&south=44&west=44&east=45&maxRows=9&username=githubmapmap`;
-    console.log(geonames_url);
+    
     const fetch_response= await fetch(geonames_url);
     const json= await fetch_response.json();
     response.json(json);
@@ -36,8 +32,10 @@ app.get('/nearby/:bb', async(request, response) =>{
 
 app.get('/users/:city', async(request, response) =>{
     const city= request.params.city;
-    console.log("in the get request on server");
     const users_url= `https://api.github.com/search/users?q=location%3A${city}`;
+    // console.log(users_url);
+    //Seattle,WA example
+    // https://api.github.com/search/users?q=location%3ASeattle+location%3AWA
     const fetch_response = await fetch(users_url);
     // , {
     //   headers: new Headers({
