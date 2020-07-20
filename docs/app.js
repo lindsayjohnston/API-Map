@@ -196,12 +196,13 @@ async function testNearbyCities(bb){
                     cityName = cityInfo.name;
                 }
                 citiesArray.push(cityName);
+                checkNearbyCities();
             });
         }
     } catch (error){
         console.log(error);
     }
-    checkNearbyCities();
+
 }
 
 
