@@ -329,7 +329,7 @@ async function test(city, latLngIndex, cityNameForURL) {
         console.log(json.total_count);
 
         if(json.total_count === undefined){
-            test(city, latLngIndex, cityNameForURL);
+            setTimeout(function() {test(city, latLngIndex, cityNameForURL);}, 35000);
         } else {
             gitHubNumbersArray.push([city, latLngIndex, json.total_count]);
         }
