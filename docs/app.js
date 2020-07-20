@@ -140,8 +140,8 @@ function getCityBBCoordinates() {
     cityBB['east'] = longitude + 4;
     cityBB['west'] = longitude - 4;
 
-    // getNearbyCities(cityBB);
-    testNearbyCities(cityBB);
+
+    testNearbyCities(cityBB, false);
 }
 
 //TEST GETNEARBYCITIES
@@ -200,12 +200,6 @@ async function testNearbyCities(bb, retry){
     checkNearbyCities();
 }
 
-
-// function getNearbyCities(bb) {
-//     addSpinner(document.getElementById('message'), "Fetching nearby cities with GeoNames API.");
-    
-//     checkNearbyCities();
-// }
 
 function checkNearbyCities() {
     //citiesArray.length should match number of rows requested from GeoNames API + 1 for chosen City
