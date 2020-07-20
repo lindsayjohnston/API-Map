@@ -8,6 +8,8 @@ let chosenCity;
 let chosenState;
 let citiesArray = [];
 let usingDummyData = false;
+let verifyingCities= false;
+let fetchingCities=false;
 
 let verifiedCities = [];
 let geoCodeTally = 0;
@@ -146,9 +148,10 @@ function getCityBBCoordinates() {
 
 //TEST GETNEARBYCITIES
 
-async function testNearbyCities(bb, retry){
-    if(!retry){
+async function testNearbyCities(bb){
+    if(!fetchingCities){
         addSpinner(document.getElementById('message'), "Fetching nearby cities with GeoNames API.");
+        fetchingCities=true;
     }
   
     try{
@@ -211,9 +214,10 @@ function checkNearbyCities() {
     }
 }
 
-function verifyCities(retry) {
-    if(!retry){
+function verifyCities() {
+    if(!verifyingCities){
         addSpinner(document.getElementById('message'), "Verifying cities with Google Geocoder API.");
+        verifyingCities=true;
     }
     
     citiesArray.forEach(city => {
