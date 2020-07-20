@@ -7,6 +7,7 @@ const cityBB = {
 let chosenCity;
 let chosenState;
 let citiesArray = [];
+let errorMessage= false;
 let usingDummyData = false;
 let verifyingCities= false;
 let fetchingCities=false;
@@ -25,12 +26,6 @@ let infoWindow;
 //LISTEN FOR CLICK TO RUN PROGRAM
 document.getElementById('get-map').addEventListener('click', getChosenLatLng);
 document.getElementById('city-input').addEventListener('keydown', guessCity);
-
-//TEMP CLICKS FOR TESTING
-// document.getElementById('get-map').addEventListener('click', testNearbyCities);
-
-//ADD SCRIPT ONLOAD
-
 
 //AUTOCOMPLETE CITY
 function guessCity() {
@@ -52,6 +47,7 @@ function addError(element, message) {
     element.style.backgroundColor= 'rgb(236, 94, 94)';
     element.style.width='600px';
     element.innerHTML += `${message}`;
+    errorMessage=true;
 }
 
 function clearError(element){
@@ -62,7 +58,7 @@ function addSpinner(element, message) {
     element.style.backgroundColor= 'white';
     element.style.width='600px';
     element.style.padding="5px";
-    element.innerHTML += `${message} <i id="spinner" class="fa fa-spinner fa-pulse" aria-hidden="true"></i>`
+    element.innerHTML += `${message} <i id="spinner" class="fa fa-spinner fa-pulse" aria-hidden="true"></i>`;
 }
 
 function addCheck(element) {
@@ -79,6 +75,9 @@ function reloadData() {
     citiesLatLng = [];
     gitHubNumbersArray = [];
     chosenCity = '';
+    verifyingCities= false;
+    fetchingCities=false;
+    gettingGitHubUsers= false;
     document.getElementById('map').innerHTML = '';
     document.getElementById('message').innerHTML = '';
     document.getElementById('marker-explanation').textContent='';
@@ -105,9 +104,11 @@ function getChosenLatLng() {
     } else {
         reloadData();
         disableGetMap();
+        if(errorMessage){
+            clearError(document.getElementById('message'));
+        }
         //START FETCHING NEARBY CITIES SPINNER
         addSpinner(document.getElementById('message'), "Fetching coordinates of chosen city with Google Geocoder API.");
-        clearError(document.getElementById('message'));
         let inputArray = input.split(', ');
         chosenCity = inputArray[0];
         chosenState = inputArray[1];
@@ -143,8 +144,7 @@ function getCityBBCoordinates() {
     cityBB['east'] = longitude + 4;
     cityBB['west'] = longitude - 4;
 
-
-    testNearbyCities(cityBB, false);
+    testNearbyCities(cityBB);
 }
 
 //TEST GETNEARBYCITIES
