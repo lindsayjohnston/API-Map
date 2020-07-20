@@ -231,7 +231,7 @@ function verifyCities() {
         geocoder.geocode(geocoderRequest, function (array, status) {
             if (status === "OVER_QUERY_LIMIT" & geoCodeTally < citiesArray.length) {
                 console.log("Geocoder Over query limit: " + city);
-                setTimeout(function(){ verifyCities(true);}, 500);
+                setTimeout(function(){ verifyCities();}, 500);
             } else {
                 geoCodeTally++;
                 if (array) {
@@ -262,10 +262,11 @@ function verifyCities() {
                         pushLatLng(array);
                     }
                 }
+                checkLatLng();
             }
         });
     });
-    checkLatLng()
+    
 }
 
 function pushLatLng(array) {
