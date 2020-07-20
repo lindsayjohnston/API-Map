@@ -208,14 +208,16 @@ function checkNearbyCities() {
     //citiesArray.length should match number of rows requested from GeoNames API + 1 for chosen City
     if (citiesArray.length !== 10 && !usingDummyData) {
         setTimeout(checkNearbyCities, 200);
+    } else if (verifyingCities){
+        console.log("in checkingNearbyCities")
     } else {
-        addCheck(document.getElementById('message'));
         verifyCities();
     }
 }
 
 function verifyCities() {
     if(!verifyingCities){
+        addCheck(document.getElementById('message'));
         addSpinner(document.getElementById('message'), "Verifying cities with Google Geocoder API.");
         verifyingCities=true;
     }
