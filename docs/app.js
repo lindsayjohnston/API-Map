@@ -203,8 +203,11 @@ function checkNearbyCities() {
     }
 }
 
-function verifyCities() {
-    addSpinner(document.getElementById('message'), "Verifying cities with Google Geocoder API.");
+function verifyCities(retry) {
+    if(!retry){
+        addSpinner(document.getElementById('message'), "Verifying cities with Google Geocoder API.");
+    }
+    
     citiesArray.forEach(city => {
         let geocoderRequest = {
             address: city
@@ -213,8 +216,8 @@ function verifyCities() {
 
         geocoder.geocode(geocoderRequest, function (array, status) {
             if (status === "OVER_QUERY_LIMIT") {
-                console.log("Over query limit: " + city);
-                addError(document.getElementById('message'), "Something went wrong. Please try again!")
+                console.log("Geocoder Over query limit: " + city);
+                setTimeout(function(){ verifyCities(true);}, 500);
             } else {
                 geoCodeTally++;
                 if (array) {
@@ -280,23 +283,6 @@ function deleteCityDuplicates() {
     getGitHubUsers();
 }
 
-//////TEST SERVER 
-
-
-///GET NUMBER OF GITHUB USERS
-// async function test() {
-//     try {
-//         const api_url = `/users/${city}`;
-//         const response = await fetch(api_url);
-//         const json = await response.json();
-//         console.log(json.total_count);
-
-//     } catch (error) {
-//         console.log(error);
-//     }
-// };
-
-// test();
 
 function getGitHubUsers() {
     addCheck(document.getElementById('message'));
@@ -314,11 +300,6 @@ function getGitHubUsers() {
         });
     
         test(city, citiesLatLng[index], cityNameForURL);
-
-        // github.getUsersInLocation(cityNameForURL)
-        //     .then(data => {
-        //         gitHubNumbersArray.push([city, citiesLatLng[index], data.location.total_count]);
-        //     })
 
     })
     checkGitHub();
