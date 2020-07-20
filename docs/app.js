@@ -143,9 +143,9 @@ async function testNearbyCities(bb){
             alert('There was a problem with the GeoNames server and we will use dummy data surrounding Yakima, WA to run the App. Sorry about that!');
             citiesArray = ["Yakima WA", "Kennewick WA", "Tacoma WA", 'Seattle WA', 'Richland WA', "Walla Walla WA", 'Yakima WA'];
             usingDummyData = true;
-            document.getElementById('city-input').value = "Seattle, WA, USA"
+            document.getElementById('city-input').value = "Yakima, WA, USA"
             geoCodeTally = 0;
-            chosenCity = 'Seattle';
+            chosenCity = 'Yakima';
             chosenState = 'WA';
             citiesLatLng = [];
             verifiedCities = [];
@@ -303,11 +303,9 @@ function getGitHubUsers() {
         cityNameArray.forEach(function (word, index) {
             if (index === 0) {
                 cityNameForURL = `"`+ word;
-            } else if(index !== cityNameArray.length -1){
+            } else(index !== cityNameArray.length -1){
                 cityNameForURL+= "+" + word;
-            } else {
-                cityNameForURL += '"+location%3A' + word;
-            }
+            } 
         })
     
         test(city, citiesLatLng[index], cityNameForURL);
