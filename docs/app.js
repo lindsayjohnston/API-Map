@@ -84,7 +84,7 @@ function reloadData() {
 
 function disableGetMap(){
     const getMapButton= document.getElementById('get-map');
-    getMapButton.value="This is a test";
+    getMapButton.textContent="this is a test";
 }
 
 function getChosenLatLng() {
