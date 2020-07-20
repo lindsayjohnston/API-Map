@@ -263,7 +263,7 @@ function pushLatLng(array) {
 
 //MAKE SURE APP HAS HAD TIME TO GET RESPONSES FROM LAT/LNG API
 function checkLatLng() {
-    if (geoCodeTally !== (citiesArray.length)) {
+    if (geoCodeTally < citiesArray.length) {
         setTimeout(checkLatLng, 200);
     } else {
         deleteCityDuplicates();
