@@ -215,7 +215,7 @@ function verifyCities(retry) {
         const geocoder = new google.maps.Geocoder();
 
         geocoder.geocode(geocoderRequest, function (array, status) {
-            if (status === "OVER_QUERY_LIMIT" & geoCodeTally !== citiesArray.length) {
+            if (status === "OVER_QUERY_LIMIT" & geoCodeTally < citiesArray.length) {
                 console.log("Geocoder Over query limit: " + city);
                 setTimeout(function(){ verifyCities(true);}, 500);
             } else {
