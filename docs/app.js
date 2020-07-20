@@ -10,6 +10,7 @@ let citiesArray = [];
 let usingDummyData = false;
 let verifyingCities= false;
 let fetchingCities=false;
+let gettingGitHubUsers= false;
 
 let verifiedCities = [];
 let geoCodeTally = 0;
@@ -297,8 +298,12 @@ function deleteCityDuplicates() {
 
 
 function getGitHubUsers() {
-    addCheck(document.getElementById('message'));
-    addSpinner(document.getElementById('message'), "Fetching numbers of GitHub Users with GitHub API.");
+    if(!gettingGitHubUsers){
+        addCheck(document.getElementById('message'));
+        addSpinner(document.getElementById('message'), "Fetching numbers of GitHub Users with GitHub API.");
+        gettingGitHubUsers= true;
+    }
+
     verifiedCities.forEach((city, index) => {
         let cityNameForURL;
         //Change City Name to URL format
