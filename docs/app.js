@@ -82,8 +82,14 @@ function reloadData() {
     document.getElementById('map-div').style.display= 'none';
 }
 
+function disableGetMap(){
+    const getMapButton= document.getElementById('get-map');
+    getMapButton.value="This is a test";
+}
+
 function getChosenLatLng() {
     reloadData();
+    disableGetMap();
     let input = document.getElementById('city-input').value;
     if (input === '') {
         addError(document.getElementById('message'), 'Please enter a valid city!');
