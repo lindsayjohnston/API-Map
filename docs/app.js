@@ -132,8 +132,11 @@ function getCityBBCoordinates() {
 
 //TEST GETNEARBYCITIES
 
-async function testNearbyCities(bb){
-    addSpinner(document.getElementById('message'), "Fetching nearby cities with GeoNames API.");
+async function testNearbyCities(bb, retry){
+    if(!retry){
+        addSpinner(document.getElementById('message'), "Fetching nearby cities with GeoNames API.");
+    }
+  
     try{
         let bbCommas= `${bb.north},${bb.south},${bb.west},${bb.east}`;
         const citiesURL= `/nearby/${bbCommas}`;
@@ -150,7 +153,7 @@ async function testNearbyCities(bb){
             // citiesLatLng = [];
             // verifiedCities = [];
             console.log("Geonames fail");
-            setTimeout(function (){ testNearbyCities(bb);}, 200);
+            setTimeout(function (){ testNearbyCities(bb, true);}, 200);
         } else {
             json.geonames.forEach(cityInfo => {
                 //populate citiesarray with wikipedia search name from Geonames wiki
