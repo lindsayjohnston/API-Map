@@ -302,11 +302,11 @@ function getGitHubUsers() {
         let cityNameArray = city.split(" ");
         cityNameArray.forEach(function (word, index) {
             if (index === 0) {
-                cityNameForURL = `"`+ word;
-            } else(index !== cityNameArray.length -1){
+                cityNameForURL = word;
+            } else{
                 cityNameForURL+= "+" + word;
             } 
-        })
+        });
     
         test(city, citiesLatLng[index], cityNameForURL);
 

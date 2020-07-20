@@ -32,7 +32,7 @@ app.get('/nearby/:bb', async(request, response) =>{
 
 app.get('/users/:city', async(request, response) =>{
     const city= request.params.city;
-    const users_url= `https://api.github.com/search/users?q=location%3A${city}`;
+    const users_url= `https://api.github.com/search/users?q=location%3A"${city}"`;
     // console.log(users_url);
     //Seattle,WA example
     // https://api.github.com/search/users?q=location%3ASeattle+location%3AWA
