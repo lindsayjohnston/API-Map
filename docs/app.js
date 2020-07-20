@@ -349,7 +349,7 @@ async function test(city, latLngIndex, cityNameForURL) {
 function checkGitHub() {
     if (gitHubNumbersArray.length !== verifiedCities.length) {
         setTimeout(checkGitHub, 200);
-    } else if (checkingTop5){
+    } else if (gettingTop5){
         console.log("in checkGitHub");
     } else {
         getTop5(gitHubNumbersArray);
