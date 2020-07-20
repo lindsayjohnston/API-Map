@@ -280,6 +280,8 @@ function pushLatLng(array) {
 function checkLatLng() {
     if (geoCodeTally < citiesArray.length) {
         setTimeout(checkLatLng, 200);
+    } else if(gettingGitHubUsers){
+        console.log('in CheckLatLng');
     } else {
         deleteCityDuplicates();
     }
