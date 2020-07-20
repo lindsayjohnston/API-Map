@@ -399,7 +399,7 @@ function getMap(cityArray) {
 
     map = new google.maps.Map(
         document.getElementById('map'),
-        { center: cityArray[0][1], zoom: 6.5 }
+        { center: cityArray[0][1], zoom: 4.5 }
     );
 
     for (let i = 0; i < cityArray.length; i++) {
