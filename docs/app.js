@@ -84,16 +84,24 @@ function reloadData() {
 
 function disableGetMap(){
     const getMapButton= document.getElementById('get-map');
-    getMapButton.textContent="this is a test";
+    getMapButton.disabled=true;
+    getMapButton.style.width= '600px';
+    getMapButton.textContent="Upgrade to Premium to make more than one request per minute!";
+    setTimeout(()=>{
+        getMapButton.disabled=false;
+        getMapButton.style.width= '200px';
+        getMapButton.textContent="Get Map of GitHub Users";
+    }, 60000);
 }
 
 function getChosenLatLng() {
-    reloadData();
-    disableGetMap();
+    
     let input = document.getElementById('city-input').value;
     if (input === '') {
         addError(document.getElementById('message'), 'Please enter a valid city!');
     } else {
+        reloadData();
+        disableGetMap();
         //START FETCHING NEARBY CITIES SPINNER
         addSpinner(document.getElementById('message'), "Fetching coordinates of chosen city with Google Geocoder API.");
         clearError(document.getElementById('message'));
