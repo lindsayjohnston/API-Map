@@ -48,7 +48,7 @@ function addError(element, message) {
     element.style.padding = '5px';
     element.style.backgroundColor = 'rgb(236, 94, 94)';
     element.style.width = '600px';
-    element.innerHTML += `${message}`;
+    element.innerHTML = `${message}`;
     errorMessage = true;
 }
 
@@ -166,10 +166,9 @@ async function testNearbyCities(bb) {
             console.log("Geonames fail");
             geonamesFail ++;
             
-            if(geonamesFail > 4){
+            if(geonamesFail > 3){
                 addError(document.getElementById('message'), `We couldn't find enough data near this city. Please try again.`);
-                setTimeout(location.reload
-                    , 3000);
+                setTimeout(()=>{location.reload()}, 3000);
             }
             setTimeout(function () { testNearbyCities(bb, true); }, 200);
         } else {
