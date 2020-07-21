@@ -28,7 +28,7 @@ let infoWindow;
 //LISTEN FOR CLICK TO RUN PROGRAM
 document.getElementById('get-map').addEventListener('click', getChosenLatLng);
 document.getElementById('city-input').addEventListener('keydown', guessCity);
-document.getElementById('city-input').addEventListener('click', clearText(document.getElementById('city-input')));
+document.getElementById('city-input').addEventListener('click', (event)=>{ event.target.value= "";});
 
 //AUTOCOMPLETE CITY
 function guessCity() {
