@@ -6,6 +6,7 @@ const cityBB = {
 }
 let chosenCity;
 let chosenState;
+let geonamesFail= 0;
 let citiesArray = [];
 let errorMessage = false;
 let usingDummyData = false;
@@ -171,6 +172,12 @@ async function testNearbyCities(bb) {
             // citiesLatLng = [];
             // verifiedCities = [];
             console.log("Geonames fail");
+            geonamesFail ++;
+            
+            if(geonamesFail > 8){
+                addError(document.getElementById('message'), `We couldn't find enough data near this city. Please try again.`);
+                reloadData();
+            }
             setTimeout(function () { testNearbyCities(bb, true); }, 200);
         } else {
             json.geonames.forEach(cityInfo => {
