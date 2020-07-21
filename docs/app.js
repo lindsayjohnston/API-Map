@@ -168,7 +168,8 @@ async function testNearbyCities(bb) {
             
             if(geonamesFail > 4){
                 addError(document.getElementById('message'), `We couldn't find enough data near this city. Please try again.`);
-                setTimeout(location.reload(), 3000);
+                setTimeout(location.reload
+                    , 3000);
             }
             setTimeout(function () { testNearbyCities(bb, true); }, 200);
         } else {
