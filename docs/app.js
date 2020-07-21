@@ -335,10 +335,10 @@ async function test(city, latLngIndex, cityNameForURL) {
         const api_url = `/users/${cityNameForURL}`;
         const response = await fetch(api_url);
         const json = await response.json();
-        console.log(json.total_count);
 
         if (json.total_count === undefined) {
-            setTimeout(function () { test(city, latLngIndex, cityNameForURL); }, 35000);
+            console.log('GitHub server is currently busy. Trying again...');
+            setTimeout(function () { test(city, latLngIndex, cityNameForURL); }, 8000);
         } else {
             gitHubNumbersArray.push([city, latLngIndex, json.total_count]);
         }
@@ -370,8 +370,6 @@ function getTop5(array) {
         gettingTop5 = true;
     }
     ///array is [[city, {lat: lng: }, #], ....]
-    console.log("verified cities array before top 5: ");
-    console.log(array);
     let top5 = [];
     //make sure chosen city is displayed
     let chosenIndex;
@@ -396,7 +394,6 @@ function getTop5(array) {
             }
         }
     }
-    console.log(top5);
     getMap(top5);
 }
 
