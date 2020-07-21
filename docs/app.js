@@ -81,6 +81,7 @@ function reloadData() {
     fetchingCities = false;
     gettingGitHubUsers = false;
     gettingTop5 = false;
+    errorMessage= false;
     document.getElementById('map').innerHTML = '';
     document.getElementById('message').innerHTML = '';
     document.getElementById('marker-explanation').textContent = '';
