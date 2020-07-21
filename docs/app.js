@@ -92,11 +92,13 @@ function reloadData() {
 function disableGetMap() {
     const getMapButton = document.getElementById('get-map');
     getMapButton.disabled = true;
+    getMapButton.style.cursor="none";
     getMapButton.style.width = '600px';
     getMapButton.textContent = "Upgrade to Premium to make more than one request per minute!";
     setTimeout(() => {
         getMapButton.disabled = false;
         getMapButton.style.width = '200px';
+        getMapButton.style.cursor="pointer";
         getMapButton.textContent = "Get Map of GitHub Users";
     }, 60000);
 }
