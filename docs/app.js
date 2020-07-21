@@ -163,21 +163,12 @@ async function testNearbyCities(bb) {
         const response = await fetch(citiesURL);
         const json = await response.json();
         if (json.status !== undefined) {
-            // alert('There was a problem with the GeoNames server and we will use dummy data surrounding Yakima, WA to run the App. Sorry about that!');
-            // citiesArray = ["Yakima WA", "Kennewick WA", "Tacoma WA", 'Seattle WA', 'Richland WA', "Walla Walla WA", 'Yakima WA'];
-            // usingDummyData = true;
-            // document.getElementById('city-input').value = "Yakima, WA, USA"
-            // geoCodeTally = 0;
-            // chosenCity = 'Yakima';
-            // chosenState = 'WA';
-            // citiesLatLng = [];
-            // verifiedCities = [];
             console.log("Geonames fail");
             geonamesFail ++;
             
-            if(geonamesFail > 8){
+            if(geonamesFail > 4){
                 addError(document.getElementById('message'), `We couldn't find enough data near this city. Please try again.`);
-                reloadData();
+                setTimeout(location.reload(), 3000);
             }
             setTimeout(function () { testNearbyCities(bb, true); }, 200);
         } else {
