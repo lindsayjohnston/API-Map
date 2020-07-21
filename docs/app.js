@@ -341,7 +341,12 @@ async function test(city, latLngIndex, cityNameForURL) {
             gitHubNumbersArray.push([city, latLngIndex, json.total_count]);
         }
     } catch (error) {
-        console.log(error);
+        console.log(`Error getting GitHub numbers for ${city}. It wil be removed.`);
+        verifiedCities.forEach( (verifiedCity,index)=>{
+            if (city === verifiedCity) {
+                verifiedCities.splice(index, 1);
+            }
+        })
     }
 };
 
