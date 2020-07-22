@@ -325,8 +325,6 @@ function prepForGitHub() {
 
         cityNamesUrlArray.push(cityNameForURL);
     })
-    console.log(cityNamesUrlArray);
-    console.log(verifiedCities);
     getGitHubNumbers(cityNamesUrlArray);
     // checkGitHub(); put this in test()
 };
@@ -340,16 +338,19 @@ async function getGitHubNumbers(cityNamesUrlArray) {
             const response = await fetch(api_url);
             const json = await response.json();
             if (json.total_count=== undefined){
-                console.log('we have an error');
+                console.log(`we have an error with ${verifyCities[i]}`);
+                let vc= verifiedCities.splice(i, 1);
+                verifiedCities.push(vc);
+                let cll= citiesLatLng.splice(i, 1);
+                citiesLatLng.push(cll);
+            } else {
+                gitHubNumbersArray.push([verifiedCities[i], citiesLatLng[i], json.total_count]);
             }
-    
-            gitHubNumbersArray.push([verifiedCities[i], citiesLatLng[i], json.total_count]);
         } catch (error) {
             console.log(`Error getting GitHub numbers for ${verifiedCities[i]}. It wil be removed.`);
             verifiedCities.splice(i, 1);
         }
     }  
-
     checkGitHub();
 };
 
