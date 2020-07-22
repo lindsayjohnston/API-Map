@@ -92,7 +92,7 @@ function reloadData() {
 function disableGetMap() {
     const getMapButton = document.getElementById('get-map');
     getMapButton.disabled = true;
-    getMapButton.style.cursor="none";
+    getMapButton.style.cursor="default";
     getMapButton.style.width = '600px';
     getMapButton.textContent = "Upgrade to Premium to make more than one request per minute!";
     setTimeout(() => {
@@ -170,7 +170,7 @@ async function testNearbyCities(bb) {
             geonamesFail ++;
             
             if(geonamesFail > 3){
-                addError(document.getElementById('message'), `We couldn't find enough data near this city. Please try again.`);
+                addError(document.getElementById('message'), `There was a problem requesting nearby cities with GeoNames. Please try again or upgrade to Premium for better service.`);
                 setTimeout(()=>{location.reload()}, 3000);
             }
             setTimeout(function () { testNearbyCities(bb, true); }, 200);
@@ -325,12 +325,13 @@ function getGitHubUsers() {
         });
 
         test(city, citiesLatLng[index], cityNameForURL);
+        
 
     })
     checkGitHub();
 };
 
-async function test(city, latLngIndex, cityNameForURL) {
+function test(city, latLngIndex, cityNameForURL) {
     try {
         const api_url = `/users/${cityNameForURL}`;
         const response = await fetch(api_url);
