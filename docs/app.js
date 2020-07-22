@@ -212,7 +212,7 @@ async function testNearbyCities(bb) {
 function checkNearbyCities() {
     //citiesArray.length should match number of rows requested from GeoNames API + 1 for chosen City
     if (citiesArray.length !== 10 && !usingDummyData) {
-        setTimeout(checkNearbyCities, 200);
+        setTimeout(checkNearbyCities, 1600);
     } else if (verifyingCities) {
         console.log("in checkingNearbyCities")
     } else {
@@ -284,7 +284,7 @@ function pushLatLng(array) {
 //MAKE SURE APP HAS HAD TIME TO GET RESPONSES FROM LAT/LNG API
 function checkLatLng() {
     if (geoCodeTally < citiesArray.length) {
-        setTimeout(checkLatLng, 200);
+        setTimeout(checkLatLng, 1800);
     } else if (gettingGitHubUsers) {
         console.log('in CheckLatLng');
     } else {
