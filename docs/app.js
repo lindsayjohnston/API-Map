@@ -336,6 +336,7 @@ async function getGitHubNumbers(cityNamesUrlArray, fails) {
     for(let i=0; i<cityNamesUrlArray.length; i++){
         if(fails !== undefined){
             i=cityNamesUrlArray.length- fails;
+            gitHubNumbersFails=0;
         }
         try {
             const api_url = `/users/${cityNamesUrlArray[i]}`;
@@ -359,7 +360,7 @@ async function getGitHubNumbers(cityNamesUrlArray, fails) {
     if(gitHubNumbersFails >0){
         getGitHubNumbers(cityNamesUrlArray, gitHubNumbersFails);
     }
-    gitHubNumbersFails=0;
+    
     checkGitHub();
 };
 
