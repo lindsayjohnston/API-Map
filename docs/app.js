@@ -358,7 +358,7 @@ async function getGitHubNumbers(cityNamesUrlArray, fails) {
         }
     }  
     if(gitHubNumbersFails >0){
-        getGitHubNumbers(cityNamesUrlArray, gitHubNumbersFails);
+        setTimeout(getGitHubNumbers(cityNamesUrlArray, gitHubNumbersFails), 2000);
     }
     
     checkGitHub();
