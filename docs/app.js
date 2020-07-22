@@ -359,6 +359,7 @@ async function getGitHubNumbers(cityNamesUrlArray, fails) {
     if(gitHubNumbersFails >0){
         getGitHubNumbers(cityNamesUrlArray, gitHubNumbersFails);
     }
+    gitHubNumbersFails=0;
     checkGitHub();
 };
 
