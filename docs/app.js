@@ -204,7 +204,6 @@ async function testNearbyCities(bb) {
     } catch (error) {
         console.log(error);
     }
-
 }
 
 
@@ -265,12 +264,11 @@ function verifyCities() {
                         verifiedCities.push(`${city} ${state}`);
                         pushLatLng(array);
                     }
-                }
-                checkLatLng();
+                } 
             }
         });
     });
-
+    checkLatLng();
 }
 
 function pushLatLng(array) {
