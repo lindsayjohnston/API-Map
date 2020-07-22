@@ -339,6 +339,9 @@ async function getGitHubNumbers(cityNamesUrlArray) {
             const api_url = `/users/${cityNamesUrlArray[i]}`;
             const response = await fetch(api_url);
             const json = await response.json();
+            if (json.total_count=== undefined){
+                console.log('we have an error');
+            }
     
             gitHubNumbersArray.push([verifiedCities[i], citiesLatLng[i], json.total_count]);
         } catch (error) {
