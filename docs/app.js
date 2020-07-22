@@ -198,7 +198,8 @@ async function testNearbyCities(bb) {
                     cityName = cityInfo.name;
                 }
                 citiesArray.push(cityName);
-                checkNearbyCities();
+                // checkNearbyCities();
+                verifyCities();
             });
         }
     } catch (error) {
@@ -208,16 +209,16 @@ async function testNearbyCities(bb) {
 }
 
 
-function checkNearbyCities() {
-    //citiesArray.length should match number of rows requested from GeoNames API + 1 for chosen City
-    if (citiesArray.length !== 10 && !usingDummyData) {
-        setTimeout(checkNearbyCities, 200);
-    } else if (verifyingCities) {
-        console.log("in checkingNearbyCities")
-    } else {
-        verifyCities();
-    }
-}
+// function checkNearbyCities() {
+//     //citiesArray.length should match number of rows requested from GeoNames API + 1 for chosen City
+//     if (citiesArray.length !== 10 && !usingDummyData) {
+//         setTimeout(checkNearbyCities, 200);
+//     } else if (verifyingCities) {
+//         console.log("in checkingNearbyCities")
+//     } else {
+//         verifyCities();
+//     }
+// }
 
 function verifyCities() {
     if (!verifyingCities) {
