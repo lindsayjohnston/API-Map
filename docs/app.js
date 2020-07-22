@@ -311,6 +311,7 @@ function getGitHubUsers() {
         addSpinner(document.getElementById('message'), "Fetching numbers of GitHub Users with GitHub API.");
         gettingGitHubUsers = true;
     }
+    let cityNamesUrlArray=[];
 
     verifiedCities.forEach((city, index) => {
         let cityNameForURL;
@@ -324,11 +325,12 @@ function getGitHubUsers() {
             }
         });
 
-        test(city, citiesLatLng[index], cityNameForURL);
-        
-
+        cityNamesUrlArray.push(cityNameForURL);
     })
-    checkGitHub();
+    console.log(cityNamesUrlArray);
+    console.log(verifiedCities);
+    test(city, citiesLatLng[index], cityNameForURL);
+    // checkGitHub(); put this in test()
 };
 
 function test(city, latLngIndex, cityNameForURL) {
