@@ -14,6 +14,7 @@ let verifyingCities = false;
 let fetchingCities = false;
 let gettingGitHubUsers = false;
 let gettingTop5 = false;
+let gitHubNumbersFails=0;
 
 let verifiedCities = [];
 let geoCodeTally = 0;
@@ -329,16 +330,20 @@ function prepForGitHub() {
     // checkGitHub(); put this in test()
 };
 
-async function getGitHubNumbers(cityNamesUrlArray) {
+async function getGitHubNumbers(cityNamesUrlArray, fails) {
     //output: gitHubNumbersArray.push([city, latLngIndex, json.total_count]
 
     for(let i=0; i<cityNamesUrlArray.length; i++){
+        if(fails !== undefined){
+            i=cityNamesUrlArray.length- fails;
+        }
         try {
             const api_url = `/users/${cityNamesUrlArray[i]}`;
             const response = await fetch(api_url);
             const json = await response.json();
             if (json.total_count=== undefined){
                 console.log(`we have an error with ${verifyCities[i]}`);
+                gitHubNumbersFails++;
                 let vc= verifiedCities.splice(i, 1);
                 verifiedCities.push(vc);
                 let cll= citiesLatLng.splice(i, 1);
@@ -351,6 +356,9 @@ async function getGitHubNumbers(cityNamesUrlArray) {
             verifiedCities.splice(i, 1);
         }
     }  
+    if(gitHubNumbersFails >0){
+        getGitHubNumbers(cityNamesUrlArray, gitHubNumbersFails);
+    }
     checkGitHub();
 };
 
