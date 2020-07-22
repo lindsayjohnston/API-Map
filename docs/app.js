@@ -339,6 +339,7 @@ async function getGitHubNumbers(cityNamesUrlArray, failIndex) {
     for (let i = 0; i < cityNamesUrlArray.length; i++) {
         if(failIndex){
             i= failIndex;
+            failIndex=0;
             gitHubFailIndex= -1;
         }
         if (gitHubFailIndex === -1) {
