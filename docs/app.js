@@ -301,11 +301,11 @@ function deleteCityDuplicates() {
             }
         }
     })
-    getGitHubUsers();
+    prepForGitHub();
 }
 
 
-function getGitHubUsers() {
+function prepForGitHub() {
     if (!gettingGitHubUsers) {
         addCheck(document.getElementById('message'));
         addSpinner(document.getElementById('message'), "Fetching numbers of GitHub Users with GitHub API.");
@@ -329,31 +329,48 @@ function getGitHubUsers() {
     })
     console.log(cityNamesUrlArray);
     console.log(verifiedCities);
-    test(city, citiesLatLng[index], cityNameForURL);
+    getGitHubNumbers(cityNamesUrlArray);
     // checkGitHub(); put this in test()
 };
 
-async function test(city, latLngIndex, cityNameForURL) {
-    try {
-        const api_url = `/users/${cityNameForURL}`;
-        const response = await fetch(api_url);
-        const json = await response.json();
+async function getGitHubNumbers(cityNamesUrlArray) {
+    //output: gitHubNumbersArray.push([city, latLngIndex, json.total_count]
 
-        if (json.total_count === undefined) {
-            console.log('GitHub server is currently busy. Trying again...');
-            setTimeout(function () { test(city, latLngIndex, cityNameForURL); }, 8000);
-        } else {
-            gitHubNumbersArray.push([city, latLngIndex, json.total_count]);
+    for(let i=0; i<cityNamesUrlArray.length; i++){
+        try {
+            const api_url = `/users/${cityNamesUrlArray[i]}`;
+            const response = await fetch(api_url);
+            const json = await response.json();
+    
+            gitHubNumbersArray.push([verifiedCities[i], citiesLatLng[i], json.total_count]);
+        } catch (error) {
+            console.log(`Error getting GitHub numbers for ${verifiedCities[i]}. It wil be removed.`);
+            verifiedCities.splice(i, 1);
         }
-    } catch (error) {
-        console.log(`Error getting GitHub numbers for ${city}. It wil be removed.`);
-        verifiedCities.forEach( (verifiedCity,index)=>{
-            if (city === verifiedCity) {
-                verifiedCities.splice(index, 1);
-            }
-        })
-    }
+    }  
+
+    checkGitHub();
 };
+
+// try {
+//     const api_url = `/users/${cityNameForURL}`;
+//     const response = await fetch(api_url);
+//     const json = await response.json();
+
+//     if (json.total_count === undefined) {
+//         console.log('GitHub server is currently busy. Trying again...');
+//         setTimeout(function () { test(city, latLngIndex, cityNameForURL); }, 8000);
+//     } else {
+//         gitHubNumbersArray.push([city, latLngIndex, json.total_count]);
+//     }
+// } catch (error) {
+//     console.log(`Error getting GitHub numbers for ${city}. It wil be removed.`);
+//     verifiedCities.forEach( (verifiedCity,index)=>{
+//         if (city === verifiedCity) {
+//             verifiedCities.splice(index, 1);
+//         }
+//     })
+// }
 
 //GET NUMBER OF GITHUB USERS FOR EACH VERIFIED CITY
 function checkGitHub() {
