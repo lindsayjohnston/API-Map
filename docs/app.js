@@ -6,7 +6,7 @@ const cityBB = {
 }
 let chosenCity;
 let chosenState;
-let geonamesFail= 0;
+let geonamesFail = 0;
 let citiesArray = [];
 let errorMessage = false;
 let usingDummyData = false;
@@ -14,7 +14,8 @@ let verifyingCities = false;
 let fetchingCities = false;
 let gettingGitHubUsers = false;
 let gettingTop5 = false;
-let gitHubNumbersFails=0;
+let gitHubFailIndex = -1;
+let gitHubSuccess=0;
 
 let verifiedCities = [];
 let geoCodeTally = 0;
@@ -29,7 +30,7 @@ let infoWindow;
 //LISTEN FOR CLICK TO RUN PROGRAM
 document.getElementById('get-map').addEventListener('click', getChosenLatLng);
 document.getElementById('city-input').addEventListener('keydown', guessCity);
-document.getElementById('city-input').addEventListener('click', (event)=>{ event.target.value= "";});
+document.getElementById('city-input').addEventListener('click', (event) => { event.target.value = ""; });
 
 //AUTOCOMPLETE CITY
 function guessCity() {
@@ -83,7 +84,9 @@ function reloadData() {
     fetchingCities = false;
     gettingGitHubUsers = false;
     gettingTop5 = false;
-    errorMessage= false;
+    errorMessage = false;
+    gitHubFailIndex = -1;
+    gitHubSuccess=0;
     document.getElementById('map').innerHTML = '';
     document.getElementById('message').innerHTML = '';
     document.getElementById('marker-explanation').textContent = '';
@@ -93,13 +96,13 @@ function reloadData() {
 function disableGetMap() {
     const getMapButton = document.getElementById('get-map');
     getMapButton.disabled = true;
-    getMapButton.style.cursor="default";
+    getMapButton.style.cursor = "default";
     getMapButton.style.width = '600px';
     getMapButton.textContent = "Upgrade to Premium to make more than one request per minute!";
     setTimeout(() => {
         getMapButton.disabled = false;
         getMapButton.style.width = '200px';
-        getMapButton.style.cursor="pointer";
+        getMapButton.style.cursor = "pointer";
         getMapButton.textContent = "Get Map of GitHub Users";
     }, 60000);
 }
@@ -168,11 +171,11 @@ async function testNearbyCities(bb) {
         const json = await response.json();
         if (json.status !== undefined) {
             console.log("Geonames fail");
-            geonamesFail ++;
-            
-            if(geonamesFail > 3){
+            geonamesFail++;
+
+            if (geonamesFail > 3) {
                 addError(document.getElementById('message'), `There was a problem requesting nearby cities with GeoNames. Please try again or upgrade to Premium for better service.`);
-                setTimeout(()=>{location.reload()}, 3000);
+                setTimeout(() => { location.reload() }, 3000);
             }
             setTimeout(function () { testNearbyCities(bb, true); }, 200);
         } else {
@@ -265,7 +268,7 @@ function verifyCities() {
                         verifiedCities.push(`${city} ${state}`);
                         pushLatLng(array);
                     }
-                } 
+                }
             }
         });
     });
@@ -310,7 +313,7 @@ function prepForGitHub() {
         addSpinner(document.getElementById('message'), "Fetching numbers of GitHub Users with GitHub API.");
         gettingGitHubUsers = true;
     }
-    let cityNamesUrlArray=[];
+    let cityNamesUrlArray = [];
 
     verifiedCities.forEach((city, index) => {
         let cityNameForURL;
@@ -330,38 +333,42 @@ function prepForGitHub() {
     // checkGitHub(); put this in test()
 };
 
-async function getGitHubNumbers(cityNamesUrlArray, fails) {
+async function getGitHubNumbers(cityNamesUrlArray, failIndex) {
     //output: gitHubNumbersArray.push([city, latLngIndex, json.total_count]
-
-    for(let i=0; i<cityNamesUrlArray.length; i++){
-        if(fails !== undefined){
-            i=cityNamesUrlArray.length- fails;
-            gitHubNumbersFails=0;
+    
+    for (let i = 0; i < cityNamesUrlArray.length; i++) {
+        if(failIndex){
+            i= failIndex;
+            gitHubFailIndex= -1;
         }
-        try {
-            const api_url = `/users/${cityNamesUrlArray[i]}`;
-            const response = await fetch(api_url);
-            const json = await response.json();
-            if (json.total_count=== undefined){
-                console.log(`we have an error with ${verifiedCities[i]}`);
-                gitHubNumbersFails++;
-                let vc= verifiedCities.splice(i, 1);
-                verifiedCities.push(vc[0]);
-                let cll= citiesLatLng.splice(i, 1);
-                citiesLatLng.push(cll[0]);
-            } else {
-                gitHubNumbersArray.push([verifiedCities[i], citiesLatLng[i], json.total_count]);
+        if (gitHubFailIndex === -1) {
+            try {
+                const api_url = `/users/${cityNamesUrlArray[i]}`;
+                const response = await fetch(api_url);
+                const json = await response.json();
+                if (json.total_count === undefined) {
+                    console.log(`we have an error with ${verifiedCities[i]}`);
+                    gitHubFailIndex = i;
+                    setTimeout(()=>{getGitHubNumbers(cityNamesUrlArray, i);}, 2000);
+                    // let vc= verifiedCities.splice(i, 1);
+                    // verifiedCities.push(vc[0]);
+                    // let cll= citiesLatLng.splice(i, 1);
+                    // citiesLatLng.push(cll[0]);
+                } else {
+                    gitHubNumbersArray.push([verifiedCities[i], citiesLatLng[i], json.total_count]);
+                    gitHubSuccess++;
+                }
+            } catch (error) {
+                console.log(`Error getting GitHub numbers for ${verifiedCities[i]}. It wil be removed.`);
+                verifiedCities.splice(i, 1);
             }
-        } catch (error) {
-            console.log(`Error getting GitHub numbers for ${verifiedCities[i]}. It wil be removed.`);
-            verifiedCities.splice(i, 1);
         }
-    }  
-    if(gitHubNumbersFails >0){
-        setTimeout(getGitHubNumbers(cityNamesUrlArray, gitHubNumbersFails), 2000);
     }
     
-    checkGitHub();
+    if(gitHubSuccess === verifiedCities.length){
+        getTop5(gitHubNumbersArray);
+    }
+    // checkGitHub();
 };
 
 // try {
@@ -385,15 +392,15 @@ async function getGitHubNumbers(cityNamesUrlArray, fails) {
 // }
 
 //GET NUMBER OF GITHUB USERS FOR EACH VERIFIED CITY
-function checkGitHub() {
-    if (gitHubNumbersArray.length !== verifiedCities.length) {
-        setTimeout(checkGitHub, 200);
-    } else if (gettingTop5){
-        console.log("in checkGitHub");
-    } else {
-        getTop5(gitHubNumbersArray);
-    }
-}
+// function checkGitHub() {
+//     if (gitHubNumbersArray.length !== verifiedCities.length) {
+//         setTimeout(checkGitHub, 200);
+//     } else if (gettingTop5) {
+//         console.log("in checkGitHub");
+//     } else {
+//         getTop5(gitHubNumbersArray);
+//     }
+// }
 
 //FIND TOP 5 CITIES BY HIGHEST NUMBER OF GITHUB USERS
 function getTop5(array) {
