@@ -333,7 +333,7 @@ function getGitHubUsers() {
     // checkGitHub(); put this in test()
 };
 
-function test(city, latLngIndex, cityNameForURL) {
+async function test(city, latLngIndex, cityNameForURL) {
     try {
         const api_url = `/users/${cityNameForURL}`;
         const response = await fetch(api_url);
