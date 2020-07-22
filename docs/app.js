@@ -350,7 +350,7 @@ async function getGitHubNumbers(cityNamesUrlArray, failIndex) {
                 if (json.total_count === undefined) {
                     console.log(`we have an error with ${verifiedCities[i]}`);
                     gitHubFailIndex = i;
-                    setTimeout(()=>{getGitHubNumbers(cityNamesUrlArray, i);}, 4000);
+                    
                     // let vc= verifiedCities.splice(i, 1);
                     // verifiedCities.push(vc[0]);
                     // let cll= citiesLatLng.splice(i, 1);
@@ -368,6 +368,10 @@ async function getGitHubNumbers(cityNamesUrlArray, failIndex) {
     
     if(gitHubSuccess === verifiedCities.length){
         getTop5(gitHubNumbersArray);
+    } else {
+        setTimeout(()=>{
+            console.log(`running getGitHubNumbers() again starting with ${verifiedCities[i]}`)
+            getGitHubNumbers(cityNamesUrlArray, gitHubFailIndex);}, 4000);
     }
     // checkGitHub();
 };
