@@ -3,6 +3,7 @@ const app= express();
 const fetch= require('node-fetch');
 require('dotenv').config();
 const { Headers }= require('node-fetch');
+const stringops=require('stringops');
 
 app.use(express.static('docs'));
 app.use(express.json({limit: '1mb'}));
@@ -32,7 +33,8 @@ app.get('/nearby/:bb', async(request, response) =>{
 })
 
 app.get('/users/:city', async(request, response) =>{
-    const city= request.params.city;
+    let city= request.params.city;
+    city= city.noAccents;
     const users_url= `https://api.github.com/search/users?q=location%3A"${city}"`;
     // console.log(users_url);
     //Seattle,WA example
