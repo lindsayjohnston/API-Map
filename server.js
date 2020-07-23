@@ -2,6 +2,7 @@ const express= require('express');
 const app= express();
 const fetch= require('node-fetch');
 require('dotenv').config();
+const { Headers }= require('node-fetch');
 
 app.use(express.static('docs'));
 app.use(express.json({limit: '1mb'}));
