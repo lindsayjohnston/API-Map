@@ -105,13 +105,13 @@ function disableGetMap() {
     getMapButton.disabled = true;
     getMapButton.style.cursor = "default";
     getMapButton.style.width = '600px';
-    getMapButton.textContent = "Upgrade to Premium to make more than one request per minute!";
+    getMapButton.textContent = "Upgrade to Premium to make more requests per minute!";
     setTimeout(() => {
         getMapButton.disabled = false;
         getMapButton.style.width = '200px';
         getMapButton.style.cursor = "pointer";
         getMapButton.textContent = "Get Map of GitHub Users";
-    }, 60000);
+    }, 20000);
 }
 
 function getChosenLatLng() {
@@ -458,6 +458,7 @@ function getTop5(array) {
 
 //GENERATE GOOGLE MAP
 function getMap(cityArray) {
+    console.log('Top 5: ' + cityArray);
     document.getElementById('map-div').style.display = 'flex';
 
     map = new google.maps.Map(
