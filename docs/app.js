@@ -15,7 +15,7 @@ let fetchingCities = false;
 let gettingGitHubUsers = false;
 let gettingTop5 = false;
 let gitHubFailIndex = -1;
-let gitHubSuccess=0;
+let gitHubSuccess = 0;
 
 let verifiedCities = [];
 let geoCodeTally = 0;
@@ -48,20 +48,20 @@ function clearText(area) {
 }
 
 function addError(element, message, clear) {
-    element.style.display="block";
+    element.style.display = "block";
     element.style.padding = '5px';
     element.style.backgroundColor = 'rgb(236, 94, 94)';
     element.style.width = '600px';
-    element.style.marginTop='10px';
+    element.style.marginTop = '10px';
     element.innerHTML = `${message}`;
     errorMessage = true;
-    if( clear === true){
-        setTimeout(()=>{clearError(element)}, 5000);
+    if (clear === true) {
+        setTimeout(() => { clearError(element) }, 5000);
     }
 }
 
 function clearError(element) {
-    element.style.display="none";
+    element.style.display = "none";
     errorMessage = false;
 }
 
@@ -94,7 +94,7 @@ function reloadData() {
     gettingGitHubUsers = false;
     gettingTop5 = false;
     gitHubFailIndex = -1;
-    gitHubSuccess=0;
+    gitHubSuccess = 0;
     document.getElementById('map').innerHTML = '';
     document.getElementById('message').innerHTML = '';
     document.getElementById('marker-explanation').textContent = '';
@@ -121,11 +121,6 @@ function getChosenLatLng() {
     if (input === '') {
         addError(document.getElementById('error'), 'Please enter a valid city!');
     } else {
-        reloadData();
-        disableGetMap();
-        
-        //START FETCHING NEARBY CITIES SPINNER
-        addSpinner(document.getElementById('message'), "Fetching coordinates of chosen city with Google Geocoder API.");
         let inputArray = input.split(', ');
         chosenCity = inputArray[0];
         chosenState = inputArray[1];
@@ -133,13 +128,23 @@ function getChosenLatLng() {
             address: input
         }
 
-        const geocoder1 = new google.maps.Geocoder();
-        geocoder1.geocode(geocoderRequest, function (array, status) {
-            citiesArray.push(chosenCity + " " + chosenState);
-            verifiedCities.push(chosenCity + " " + chosenState);
-            pushLatLng(array);
-        })
-        checkChosenLatLng();
+        if (chosenState === 'AK' || chosenState === 'HI') {
+            addError(document.getElementById('error'), 'Alaska and Hawaii are not part of the lower 48! Try again!', true);
+        } else {
+            reloadData();
+            disableGetMap();
+
+            //START FETCHING NEARBY CITIES SPINNER
+            addSpinner(document.getElementById('message'), "Fetching coordinates of chosen city with Google Geocoder API.");
+
+            const geocoder1 = new google.maps.Geocoder();
+            geocoder1.geocode(geocoderRequest, function (array, status) {
+                citiesArray.push(chosenCity + " " + chosenState);
+                verifiedCities.push(chosenCity + " " + chosenState);
+                pushLatLng(array);
+            })
+            checkChosenLatLng();
+        }
     }
 }
 
@@ -176,7 +181,7 @@ async function getNearbyCities(bb) {
         const response = await fetch(citiesURL);
         const json = await response.json();
         if (json.status !== undefined) {
-            console.log("Geonames fail");
+            console.log("Geonames failed to respond. Trying again...");
             geonamesFail++;
 
             if (geonamesFail > 3) {
@@ -341,12 +346,12 @@ function prepForGitHub() {
 
 async function getGitHubNumbers(cityNamesUrlArray, failIndex) {
     //output: gitHubNumbersArray.push([city, latLngIndex, json.total_count]
-    
+
     for (let i = 0; i < cityNamesUrlArray.length; i++) {
-        if(failIndex !==undefined){
-            i= failIndex;
-            failIndex=undefined;
-            gitHubFailIndex= -1;
+        if (failIndex !== undefined) {
+            i = failIndex;
+            failIndex = undefined;
+            gitHubFailIndex = -1;
         }
         if (gitHubFailIndex === -1) {
             try {
@@ -374,14 +379,15 @@ async function getGitHubNumbers(cityNamesUrlArray, failIndex) {
             }
         }
     }
-    
-    if(gitHubSuccess === verifiedCities.length){
+
+    if (gitHubSuccess === verifiedCities.length) {
         getTop5(gitHubNumbersArray);
     } else {
-        setTimeout(()=>{
+        setTimeout(() => {
             console.log(`running getGitHubNumbers() again starting with ${verifiedCities[gitHubFailIndex]}`)
-            getGitHubNumbers(cityNamesUrlArray, gitHubFailIndex);}, 36000);
-            
+            getGitHubNumbers(cityNamesUrlArray, gitHubFailIndex);
+        }, 36000);
+
     }
     // checkGitHub();
 };
