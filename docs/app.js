@@ -370,7 +370,7 @@ async function getGitHubNumbers(cityNamesUrlArray, failIndex) {
         getTop5(gitHubNumbersArray);
     } else {
         setTimeout(()=>{
-            console.log(`running getGitHubNumbers() again starting with ${verifiedCities[i]}`)
+            console.log(`running getGitHubNumbers() again starting with ${verifiedCities[gitHubFailIndex]}`)
             getGitHubNumbers(cityNamesUrlArray, gitHubFailIndex);}, 4000);
     }
     // checkGitHub();
