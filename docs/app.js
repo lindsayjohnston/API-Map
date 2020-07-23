@@ -369,6 +369,7 @@ async function getGitHubNumbers(cityNamesUrlArray, failIndex) {
                 addError(document.getElementById('error'), `Error getting GitHub numbers for ${verifiedCities[i]}. It wil be removed.`, true);
                 verifiedCities.splice(i, 1);
                 citiesLatLng.splice(i, 1);
+                i--;
             }
         }
     }
