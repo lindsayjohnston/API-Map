@@ -33,7 +33,7 @@ div {
 }
 
 
-#message {
+#message, #error{
   margin: 0px;
   text-align: center;
   width: 600px;

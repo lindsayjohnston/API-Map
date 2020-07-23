@@ -48,6 +48,7 @@ function clearText(area) {
 }
 
 function addError(element, message) {
+    element.style.display="block";
     element.style.padding = '5px';
     element.style.backgroundColor = 'rgb(236, 94, 94)';
     element.style.width = '600px';
@@ -56,7 +57,7 @@ function addError(element, message) {
 }
 
 function clearError(element) {
-    element.style.backgroundColor = 'white';
+    element.style.display="none";
 }
 
 function addSpinner(element, message) {
@@ -73,6 +74,9 @@ function addCheck(element) {
 
 //RELOAD ALL INFO WHEN BUTTON CLICKED
 function reloadData() {
+    if (errorMessage) {
+        clearError(document.getElementById('error'));
+    }
     citiesArray = [];
     usingDummyData = false;
     verifiedCities = [];
@@ -111,13 +115,11 @@ function getChosenLatLng() {
 
     let input = document.getElementById('city-input').value;
     if (input === '') {
-        addError(document.getElementById('message'), 'Please enter a valid city!');
+        addError(document.getElementById('error'), 'Please enter a valid city!');
     } else {
         reloadData();
         disableGetMap();
-        if (errorMessage) {
-            clearError(document.getElementById('message'));
-        }
+        
         //START FETCHING NEARBY CITIES SPINNER
         addSpinner(document.getElementById('message'), "Fetching coordinates of chosen city with Google Geocoder API.");
         let inputArray = input.split(', ');
