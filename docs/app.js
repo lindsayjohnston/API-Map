@@ -88,7 +88,6 @@ function reloadData() {
     geoCodeTally = 0;
     citiesLatLng = [];
     gitHubNumbersArray = [];
-    chosenCity = '';
     verifyingCities = false;
     fetchingCities = false;
     gettingGitHubUsers = false;
