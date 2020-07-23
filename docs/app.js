@@ -52,7 +52,7 @@ function addError(element, message, clear) {
     element.style.padding = '5px';
     element.style.backgroundColor = 'rgb(236, 94, 94)';
     element.style.width = '600px';
-    element.style.margin='5px';
+    element.style.marginTop='10px';
     element.innerHTML = `${message}`;
     errorMessage = true;
     if( clear === true){
