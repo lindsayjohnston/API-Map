@@ -36,13 +36,13 @@ app.get('/users/:city', async(request, response) =>{
     // console.log(users_url);
     //Seattle,WA example
     // https://api.github.com/search/users?q=location%3ASeattle+location%3AWA
-    const fetch_response = await fetch(users_url);
-    // , {
-    //   headers: new Headers({
-    //       Authorization: `token ${process.env.GITHUB_TOKEN}`,
-    //       Accept: `application/vnd.github.v3+json`
-    //   })
-  // }
+    const fetch_response = await fetch(users_url, 
+    {
+      headers: new Headers({
+          Authorization: `token ${process.env.GITHUB_TOKEN}`,
+          Accept: `application/vnd.github.v3+json`
+      })
+    });
     // console.log(fetch_Response);
     const json = await fetch_response.json();
     response.json(json);
