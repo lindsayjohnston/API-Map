@@ -47,17 +47,21 @@ function clearText(area) {
     area.textContent = '';
 }
 
-function addError(element, message) {
+function addError(element, message, clear) {
     element.style.display="block";
     element.style.padding = '5px';
     element.style.backgroundColor = 'rgb(236, 94, 94)';
     element.style.width = '600px';
     element.innerHTML = `${message}`;
     errorMessage = true;
+    if( clear === true){
+        setTimeout(()=>{clearError(element)}, 5000);
+    }
 }
 
 function clearError(element) {
     element.style.display="none";
+    errorMessage = false;
 }
 
 function addSpinner(element, message) {
@@ -88,7 +92,6 @@ function reloadData() {
     fetchingCities = false;
     gettingGitHubUsers = false;
     gettingTop5 = false;
-    errorMessage = false;
     gitHubFailIndex = -1;
     gitHubSuccess=0;
     document.getElementById('map').innerHTML = '';
@@ -157,10 +160,10 @@ function getCityBBCoordinates() {
     cityBB['east'] = longitude + 4;
     cityBB['west'] = longitude - 4;
 
-    testNearbyCities(cityBB);
+    getNearbyCities(cityBB);
 }
 
-async function testNearbyCities(bb) {
+async function getNearbyCities(bb) {
     if (!fetchingCities) {
         addSpinner(document.getElementById('message'), "Fetching nearby cities with GeoNames API.");
         fetchingCities = true;
@@ -176,10 +179,10 @@ async function testNearbyCities(bb) {
             geonamesFail++;
 
             if (geonamesFail > 3) {
-                addError(document.getElementById('message'), `There was a problem requesting nearby cities with GeoNames. Please try again or upgrade to Premium for better service.`);
-                setTimeout(() => { location.reload() }, 3000);
+                addError(document.getElementById('error'), `There was a problem requesting nearby cities with GeoNames. Please try again or upgrade to Premium for better service.`, true);
+                setTimeout(() => { location.reload() }, 5000);
             }
-            setTimeout(function () { testNearbyCities(bb, true); }, 200);
+            setTimeout(function () { getNearbyCities(bb, true); }, 200);
         } else {
             json.geonames.forEach(cityInfo => {
                 //populate citiesarray with wikipedia search name from Geonames wiki
@@ -352,7 +355,7 @@ async function getGitHubNumbers(cityNamesUrlArray, failIndex) {
                 if (json.total_count === undefined) {
                     console.log(`we have an error with ${verifiedCities[i]}`);
                     gitHubFailIndex = i;
-                    
+                    addError(document.getElementById('error'), "The GitHub server is overloaded, but we will try again! Upgrade to Premium to avoid waiting.", true);
                     // let vc= verifiedCities.splice(i, 1);
                     // verifiedCities.push(vc[0]);
                     // let cll= citiesLatLng.splice(i, 1);
@@ -362,7 +365,7 @@ async function getGitHubNumbers(cityNamesUrlArray, failIndex) {
                     gitHubSuccess++;
                 }
             } catch (error) {
-                console.log(`Error getting GitHub numbers for ${verifiedCities[i]}. It wil be removed.`);
+                addError(document.getElementById('error'), `Error getting GitHub numbers for ${verifiedCities[i]}. It wil be removed.`, true);
                 verifiedCities.splice(i, 1);
             }
         }
