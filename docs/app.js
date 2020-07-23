@@ -371,7 +371,8 @@ async function getGitHubNumbers(cityNamesUrlArray, failIndex) {
     } else {
         setTimeout(()=>{
             console.log(`running getGitHubNumbers() again starting with ${verifiedCities[gitHubFailIndex]}`)
-            getGitHubNumbers(cityNamesUrlArray, gitHubFailIndex);}, 4000);
+            getGitHubNumbers(cityNamesUrlArray, gitHubFailIndex);}, 36000);
+            
     }
     // checkGitHub();
 };
