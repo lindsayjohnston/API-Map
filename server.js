@@ -16,6 +16,17 @@ app.listen(port, ()=>{
     console.log(`Server is running on port ${port}.`);
 });
 
+app.get('/clean/:cities', async(request, response) =>{
+  const cities= request.params.cities.split(';');
+  const newCities=[];
+  cities.forEach( city =>{
+    city=city.noAccents;
+    newCities.push(city);
+  })
+
+  response.json(newCities);
+})
+
 app.get('/nearby/:bb', async(request, response) =>{
     const bb= request.params.bb.split(',');
     const north= bb[0];

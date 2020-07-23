@@ -232,12 +232,35 @@ function checkNearbyCities() {
     }
 }
 
+async function specialCharacterClean(array){
+    try{
+        let citiesColons='';
+        //turn array into colons
+        array.forEach((city,i)=>{
+            if(i !== array.length +1){
+                citiesColons+= array[i] + ";";
+            } else {
+                citiesColons+= array[i];
+            }
+        })
+        const citiesURL = `/clean/${citiesColons}`;
+        const response = await fetch(citiesURL);
+        const json = await response.json();
+    } catch (error) {
+        log(error);
+    }
+}
+
 function verifyCities() {
     if (!verifyingCities) {
         addCheck(document.getElementById('message'));
         addSpinner(document.getElementById('message'), "Verifying cities with Google Geocoder API.");
         verifyingCities = true;
     }
+
+    //make sure there are no special characters in citiesArray
+
+    citiesArray= specialCharacterClean(citiesArray);
 
     citiesArray.forEach(city => {
         let geocoderRequest = {
