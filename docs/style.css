@@ -41,7 +41,7 @@ div {
 
 
 #header, #input-div{
-  background-color: lightblue;
+  background-color: #aadbff;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -54,7 +54,7 @@ div {
   flex-direction: column;
   align-items: center;
   height: 900px;
-  background-color: lightblue;
+  background-color: #aadbff;
   margin-top: 5px;
 }
 
