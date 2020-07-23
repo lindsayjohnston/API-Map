@@ -246,6 +246,7 @@ async function specialCharacterClean(array){
         const citiesURL = `/clean/${citiesColons}`;
         const response = await fetch(citiesURL);
         const json = await response.json();
+        return json;
     } catch (error) {
         log(error);
     }
