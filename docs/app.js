@@ -237,7 +237,7 @@ async function specialCharacterClean(array){
         let citiesColons='';
         //turn array into colons
         array.forEach((city,i)=>{
-            if(i !== array.length +1){
+            if(i !== array.length -1){
                 citiesColons+= array[i] + ";";
             } else {
                 citiesColons+= array[i];
