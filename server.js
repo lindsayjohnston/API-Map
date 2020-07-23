@@ -40,7 +40,7 @@ app.get('/users/:city', async(request, response) =>{
     {
       headers: new Headers({
           Authorization: `token ${process.env.GITHUB_TOKEN}`,
-          Accept: `application/vnd.github.v3+json`
+          // Accept: `application/vnd.github.v3+json`
       })
     });
     // console.log(fetch_Response);
