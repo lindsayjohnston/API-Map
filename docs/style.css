@@ -34,7 +34,7 @@ div {
 
 
 #message, #error{
-  margin: 0px;
+  margin: 5px;
   text-align: center;
   width: 600px;
 }
@@ -46,7 +46,13 @@ div {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+#header{
   padding: 10px;
+}
+
+#input-div{
+  padding-top: 10px;
 }
 
 #main{
