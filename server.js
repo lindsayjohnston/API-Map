@@ -24,7 +24,7 @@ app.get('/clean/:cities', async(request, response) =>{
     newCities.push(city);
   })
 
-  response.json(newCities);
+  response.send(newCities);
 })
 
 app.get('/nearby/:bb', async(request, response) =>{
