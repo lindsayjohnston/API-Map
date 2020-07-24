@@ -1,3 +1,4 @@
+let isMobile=false;
 const cityBB = {
     north: 0,
     south: 0,
@@ -32,6 +33,12 @@ document.getElementById('get-map').addEventListener('click', getChosenLatLng);
 document.getElementById('city-input').addEventListener('keydown', guessCity);
 document.getElementById('city-input').addEventListener('click', (event) => { event.target.value = ""; });
 
+function checkViewport(){
+    if(window.innerWidth <= 750){
+        isMobile=true;
+    }
+}
+
 //AUTOCOMPLETE CITY
 function guessCity() {
     let cityInput = document.getElementById('city-input');
@@ -51,7 +58,11 @@ function addError(element, message, clear) {
     element.style.display = "block";
     element.style.padding = '5px';
     element.style.backgroundColor = 'rgb(236, 94, 94)';
-    element.style.width = '600px';
+    if(isMobile){
+        element.style.width='90%';
+    } else {
+        element.style.width='600px';
+    }
     element.style.marginTop = '10px';
     element.innerHTML = `${message}`;
     errorMessage = true;
@@ -79,6 +90,7 @@ function addCheck(element) {
 
 //RELOAD ALL INFO WHEN BUTTON CLICKED
 function reloadData() {
+    checkViewport();
     if (errorMessage) {
         clearError(document.getElementById('error'));
     }
@@ -105,15 +117,18 @@ function disableGetMap() {
     const getMapButton = document.getElementById('get-map');
     getMapButton.disabled = true;
     getMapButton.style.cursor = "default";
-    let isMobile= false;
-    if(getMapButton.style.width=== '600px'){
-        let isMobile=true;
+    
+    if(isMobile){
+        getMapButton.style.width='90%';
+    } else {
+        getMapButton.style.width='600px';
     }
-    getMapButton.style.width = '600px';
     getMapButton.textContent = "Upgrade to Premium to make more requests per minute!";
     setTimeout((isMobile) => {
-        if(!isMobile){
-            getMapButton.style.width = '200px';
+        if(isMobile){
+            getMapButton.style.width='90%';
+        } else {
+            getMapButton.style.width='200px';
         }
         getMapButton.disabled = false;
         getMapButton.style.cursor = "pointer";
@@ -122,7 +137,7 @@ function disableGetMap() {
 }
 
 function getChosenLatLng() {
-
+    checkViewport();
     let input = document.getElementById('city-input').value;
     if (input === '') {
         addError(document.getElementById('error'), 'Please enter a valid city!');

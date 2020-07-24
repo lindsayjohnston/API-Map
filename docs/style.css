@@ -36,7 +36,6 @@ div {
 #message, #error{
   margin: 5px;
   text-align: center;
-  width: 600px;
 }
 
 
@@ -45,6 +44,12 @@ div {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+}
+
+#alerts{
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 #header{
@@ -87,12 +92,10 @@ div {
 }
 /* MOBILE DEVICES */
 @media only screen and (max-width: 750px){
-  body{
-    width: 100%;
-  }
-  #header, #main, #input-div{
-    width: 100%;
+  
+  #header, #main, #input-div, #alerts{
     background-color: pink;
+    width: 100%;
   }
 
   #main{
@@ -102,13 +105,14 @@ div {
 
   h1{
     font-size: 3rem;
+    text-align: center;
   }
   p{
     text-align: center;
   }
 
   #city-input, button{
-    width: 600px;
+    width: 90%;
   }
   
 }
