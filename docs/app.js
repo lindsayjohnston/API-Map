@@ -235,24 +235,12 @@ function checkNearbyCities() {
     }
 }
 
-async function specialCharacterClean(array){
-    try{
-        let citiesColons='';
-        //turn array into colons
-        array.forEach((city,i)=>{
-            if(i !== array.length -1){
-                citiesColons+= array[i] + ";";
-            } else {
-                citiesColons+= array[i];
-            }
-        })
-        const citiesURL = `/clean/${citiesColons}`;
-        const response = await fetch(citiesURL);
-        const json = await response.json();
-        return json;
-    } catch (error) {
-        log(error);
-    }
+function specialCharacterClean(array){
+    array.forEach((city, index)=>{
+        city= city.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        array[index]=city;
+    });
+    return array;
 }
 
 function verifyCities() {
