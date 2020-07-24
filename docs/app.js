@@ -57,7 +57,7 @@ function clearText(area) {
 function addError(element, message, clear) {
     element.style.display = "block";
     element.style.padding = '5px';
-    element.style.backgroundColor = 'e73b2f';
+    element.style.backgroundColor = 'rgb(231, 59, 47)';
     if(isMobile){
         element.style.width='90%';
     } else {
@@ -77,6 +77,7 @@ function clearError(element) {
 }
 
 function addSpinner(element, message) {
+    
     if(isMobile){
         element.style.width='90%';
     } else {
@@ -85,6 +86,7 @@ function addSpinner(element, message) {
     element.style.backgroundColor = 'white';
     element.style.padding = "5px";
     element.innerHTML += `${message} <i id="spinner" class="fa fa-spinner fa-pulse" aria-hidden="true"></i>`;
+    element.style.display='block';
 }
 
 function addCheck(element) {
