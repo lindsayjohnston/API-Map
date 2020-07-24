@@ -486,6 +486,7 @@ async function getMap(cityArray) {
     if(isMobile){
         document.getElementById('map-div').style.width='90%';
         document.getElementById('map-div').style.height= '50vh';
+        document.getElementById('message').innerHTML = '';
     } 
 
     map = new google.maps.Map(
