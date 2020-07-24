@@ -114,5 +114,15 @@ div {
   #city-input, button{
     width: 90%;
   }
+
+  #map-div{
+    width: 90%;
+    height: 90%;
+  }
+
+  #map {
+    width: 90%;
+    height: 90%;
+  }
   
 }

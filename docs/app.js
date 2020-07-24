@@ -77,8 +77,12 @@ function clearError(element) {
 }
 
 function addSpinner(element, message) {
+    if(isMobile){
+        element.style.width='90%';
+    } else {
+        element.style.width='600px';
+    }
     element.style.backgroundColor = 'white';
-    element.style.width = '600px';
     element.style.padding = "5px";
     element.innerHTML += `${message} <i id="spinner" class="fa fa-spinner fa-pulse" aria-hidden="true"></i>`;
 }
@@ -124,7 +128,7 @@ function disableGetMap() {
         getMapButton.style.width='600px';
     }
     getMapButton.textContent = "Upgrade to Premium to make more requests per minute!";
-    setTimeout((isMobile) => {
+    setTimeout(() => {
         if(isMobile){
             getMapButton.style.width='90%';
         } else {
@@ -479,6 +483,10 @@ function getTop5(array) {
 //GENERATE GOOGLE MAP
 async function getMap(cityArray) {
     document.getElementById('map-div').style.display = 'flex';
+    if(isMobile){
+        document.getElementById('map-div').style.width='90%';
+        document.getElementById('map-div').style.height= '50vh';
+    } 
 
     map = new google.maps.Map(
         document.getElementById('map'),
