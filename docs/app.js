@@ -456,7 +456,7 @@ function getTop5(array) {
 }
 
 //GENERATE GOOGLE MAP
-function getMap(cityArray) {
+async function getMap(cityArray) {
     document.getElementById('map-div').style.display = 'flex';
 
     map = new google.maps.Map(
@@ -465,7 +465,7 @@ function getMap(cityArray) {
     );
 
     for (let i = 0; i < cityArray.length; i++) {
-        createMarker(cityArray[i][1], cityArray[i][0], cityArray[i][2]);
+        await createMarker(cityArray[i][1], cityArray[i][0], cityArray[i][2]);
     }
     document.getElementById('marker-explanation').textContent = 'Click a marker to see the number of GitHub users.';
 }
