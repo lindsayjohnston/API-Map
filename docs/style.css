@@ -75,8 +75,6 @@ div {
   background-color: white;
 }
 
-
-
 #marker-explanation{
   margin: 10px 0 5px 0;
 }
@@ -86,4 +84,28 @@ div {
   width: 580px;
   margin: 0px 5px 10px 5px;
 
+}
+/* MOBILE DEVICES */
+@media only screen and (max-width: 750px){
+  
+  #header, #main, #input-div{
+    width: 100%;
+    background-color: pink;
+  }
+
+  #main{
+    height: 100%;
+  }
+  
+  h1{
+    font-size: 3rem;
+  }
+  p{
+    text-align: center;
+  }
+
+  #city-input, button{
+    width: 600px;
+  }
+  
 }
