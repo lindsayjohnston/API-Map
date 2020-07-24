@@ -465,13 +465,13 @@ function getMap(cityArray) {
     );
 
     for (let i = 0; i < cityArray.length; i++) {
-        await createMarker(cityArray[i][1], cityArray[i][0], cityArray[i][2]);
+        createMarker(cityArray[i][1], cityArray[i][0], cityArray[i][2]);
     }
     document.getElementById('marker-explanation').textContent = 'Click a marker to see the number of GitHub users.';
 }
 
 //GENERATE CLICKABLE MARKERS FOR MAP
-async function createMarker(latLng, cityName, numberOfUsers) {
+function createMarker(latLng, cityName, numberOfUsers) {
     //FORMAT CITY AS "CITY, STATE"
     
     let cityArray = cityName.split(" ");
