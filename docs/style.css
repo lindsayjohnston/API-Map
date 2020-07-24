@@ -106,9 +106,15 @@ div {
   h1{
     font-size: 3rem;
     text-align: center;
+    margin: 20px;
+
   }
   p{
     text-align: center;
+  }
+
+  #header > p{
+    margin-top: 0px;
   }
 
   #city-input, button{
@@ -120,9 +126,11 @@ div {
     height: 90%;
   }
 
-  #map {
-    width: 90%;
-    height: 90%;
+  #message{
+    font-size: .5rem;
   }
-  
+
+  #marker-explanation{
+    margin: 5px;
+  }
 }
