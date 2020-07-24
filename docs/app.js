@@ -1,4 +1,3 @@
-
 const cityBB = {
     north: 0,
     south: 0,
@@ -238,6 +237,11 @@ function checkNearbyCities() {
 function specialCharacterClean(array){
     array.forEach((city, index)=>{
         city= city.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        try{
+            city=decodeURI(city);
+        } catch(error){
+            console.log(error);
+        }
         array[index]=city;
     });
     return array;
