@@ -94,9 +94,10 @@ div {
   }
 
   #main{
-    height: 100%;
+    min-height: 560px;
+    max-height: 815px;
   }
-  
+
   h1{
     font-size: 3rem;
   }

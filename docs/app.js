@@ -109,7 +109,7 @@ function disableGetMap() {
     getMapButton.textContent = "Upgrade to Premium to make more requests per minute!";
     setTimeout(() => {
         getMapButton.disabled = false;
-        getMapButton.style.width = '200px';
+        getMapButton.style.width = 'default';
         getMapButton.style.cursor = "pointer";
         getMapButton.textContent = "Get Map of GitHub Users";
     }, 20000);
