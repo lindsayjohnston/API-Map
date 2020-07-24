@@ -94,7 +94,6 @@ div {
 @media only screen and (max-width: 750px){
   
   #header, #main, #input-div, #alerts{
-    background-color: pink;
     width: 100%;
   }
 
