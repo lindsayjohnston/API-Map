@@ -473,7 +473,7 @@ function getMap(cityArray) {
 //GENERATE CLICKABLE MARKERS FOR MAP
 function createMarker(latLng, cityName, numberOfUsers) {
     //FORMAT CITY AS "CITY, STATE"
-
+    console.log(cityArray);
     let cityArray = cityName.split(" ");
     let formattedCity = cityArray[0];
     for (let i = 1; i < cityArray.length; i++) {
