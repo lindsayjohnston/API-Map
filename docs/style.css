@@ -99,8 +99,7 @@ div {
   }
 
   #main{
-    min-height: 560px;
-    max-height: 700px;
+    height: 600px;
   }
 
   h1{
