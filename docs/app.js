@@ -115,7 +115,6 @@ function reloadData() {
     geonamesFail=0;
     document.getElementById('map').innerHTML = '';
     document.getElementById('message').innerHTML = '';
-    document.getElementById('marker-explanation').textContent = '';
     document.getElementById('map-div').style.display = 'none';
 }
 
