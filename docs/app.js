@@ -142,7 +142,7 @@ function getChosenLatLng() {
             const geocoder1 = new google.maps.Geocoder();
             geocoder1.geocode(geocoderRequest, function (array, status) {
                 //change name to english name
-                array.address_components.forEach(object=>{
+                array['address_components'].forEach(object=>{
                     object.types.forEach(type=>{
                         if(type==="locality"){
                             chosenCity=object.short_name;
