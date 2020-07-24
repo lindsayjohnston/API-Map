@@ -130,6 +130,11 @@ div {
     font-size: .5rem;
   }
 
+  #map{
+    width: 90%;
+    height: 90%;
+  }
+
   #marker-explanation{
     margin: 5px;
   }
