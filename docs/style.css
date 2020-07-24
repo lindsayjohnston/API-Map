@@ -137,4 +137,8 @@ div {
   #marker-explanation{
     margin: 5px;
   }
+
+  #info{
+    text-align: center;
+  }
 }

@@ -57,7 +57,7 @@ function clearText(area) {
 function addError(element, message, clear) {
     element.style.display = "block";
     element.style.padding = '5px';
-    element.style.backgroundColor = 'rgb(236, 94, 94)';
+    element.style.backgroundColor = 'e73b2f';
     if(isMobile){
         element.style.width='90%';
     } else {
@@ -513,12 +513,13 @@ function createMarker(latLng, cityName, numberOfUsers) {
             formattedCity += ` ${cityArray[i]}`;
         }
     }
+    let info= `<div id='info'> <p>${numberOfUsers} GitHub Users in ${formattedCity}</p></div>`
 
     let marker = new google.maps.Marker({
         map: map,
         position: latLng,
         animation: google.maps.Animation.DROP,
-        title: `${numberOfUsers} GitHub Users in ${formattedCity}`
+        title: info
     });
 
     marker.addListener('click', function () {
