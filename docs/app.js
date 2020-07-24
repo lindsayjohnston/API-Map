@@ -94,6 +94,7 @@ function reloadData() {
     gettingTop5 = false;
     gitHubFailIndex = -1;
     gitHubSuccess = 0;
+    geonamesFail=0;
     document.getElementById('map').innerHTML = '';
     document.getElementById('message').innerHTML = '';
     document.getElementById('marker-explanation').textContent = '';
@@ -407,39 +408,10 @@ async function getGitHubNumbers(cityNamesUrlArray, failIndex) {
         }, 36000);
 
     }
-    // checkGitHub();
+ 
 };
 
-// try {
-//     const api_url = `/users/${cityNameForURL}`;
-//     const response = await fetch(api_url);
-//     const json = await response.json();
 
-//     if (json.total_count === undefined) {
-//         console.log('GitHub server is currently busy. Trying again...');
-//         setTimeout(function () { test(city, latLngIndex, cityNameForURL); }, 8000);
-//     } else {
-//         gitHubNumbersArray.push([city, latLngIndex, json.total_count]);
-//     }
-// } catch (error) {
-//     console.log(`Error getting GitHub numbers for ${city}. It wil be removed.`);
-//     verifiedCities.forEach( (verifiedCity,index)=>{
-//         if (city === verifiedCity) {
-//             verifiedCities.splice(index, 1);
-//         }
-//     })
-// }
-
-//GET NUMBER OF GITHUB USERS FOR EACH VERIFIED CITY
-// function checkGitHub() {
-//     if (gitHubNumbersArray.length !== verifiedCities.length) {
-//         setTimeout(checkGitHub, 200);
-//     } else if (gettingTop5) {
-//         console.log("in checkGitHub");
-//     } else {
-//         getTop5(gitHubNumbersArray);
-//     }
-// }
 
 //FIND TOP 5 CITIES BY HIGHEST NUMBER OF GITHUB USERS
 function getTop5(array) {
@@ -477,7 +449,6 @@ function getTop5(array) {
 
 //GENERATE GOOGLE MAP
 function getMap(cityArray) {
-    console.log('Top 5: ' + cityArray);
     document.getElementById('map-div').style.display = 'flex';
 
     map = new google.maps.Map(
