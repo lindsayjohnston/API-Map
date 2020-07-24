@@ -87,7 +87,9 @@ div {
 }
 /* MOBILE DEVICES */
 @media only screen and (max-width: 750px){
-  
+  body{
+    width: 100%;
+  }
   #header, #main, #input-div{
     width: 100%;
     background-color: pink;
