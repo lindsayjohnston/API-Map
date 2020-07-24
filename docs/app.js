@@ -105,11 +105,17 @@ function disableGetMap() {
     const getMapButton = document.getElementById('get-map');
     getMapButton.disabled = true;
     getMapButton.style.cursor = "default";
+    let isMobile= false;
+    if(getMapButton.style.width=== '600px'){
+        let isMobile=true;
+    }
     getMapButton.style.width = '600px';
     getMapButton.textContent = "Upgrade to Premium to make more requests per minute!";
-    setTimeout(() => {
+    setTimeout((isMobile) => {
+        if(!isMobile){
+            getMapButton.style.width = '200px';
+        }
         getMapButton.disabled = false;
-        getMapButton.style.width = 'default';
         getMapButton.style.cursor = "pointer";
         getMapButton.textContent = "Get Map of GitHub Users";
     }, 20000);
