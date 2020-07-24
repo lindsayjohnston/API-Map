@@ -122,7 +122,7 @@ function getChosenLatLng() {
         addError(document.getElementById('error'), 'Please enter a valid city!');
     } else {
         let inputArray = input.split(', ');
-        let cityNoAccents= inputArray[0].normalize("NFD").replace(/[\u0300-\u036f]/g, ""));
+        let cityNoAccents= inputArray[0].normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
         chosenCity = cityNoAccents;
         chosenState = inputArray[1];
