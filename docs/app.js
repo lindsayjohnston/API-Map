@@ -1,3 +1,4 @@
+
 const cityBB = {
     north: 0,
     south: 0,
@@ -121,7 +122,9 @@ function getChosenLatLng() {
         addError(document.getElementById('error'), 'Please enter a valid city!');
     } else {
         let inputArray = input.split(', ');
-        chosenCity = inputArray[0];
+        let cityNoAccents= inputArray[0].normalize("NFD").replace(/[\u0300-\u036f]/g, ""));
+
+        chosenCity = cityNoAccents;
         chosenState = inputArray[1];
         let geocoderRequest = {
             address: input

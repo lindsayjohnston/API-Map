@@ -3,7 +3,6 @@ const app= express();
 const fetch= require('node-fetch');
 require('dotenv').config();
 const { Headers }= require('node-fetch');
-const stringops=require('stringops');
 
 app.use(express.static('docs'));
 app.use(express.json({limit: '1mb'}));
@@ -16,16 +15,6 @@ app.listen(port, ()=>{
     console.log(`Server is running on port ${port}.`);
 });
 
-app.get('/clean/:cities', async(request, response) =>{
-  const cities= request.params.cities.split(';');
-  const newCities=[];
-  cities.forEach( city =>{
-    city=city.noAccents;
-    newCities.push(city);
-  })
-
-  response.send(newCities);
-})
 
 app.get('/nearby/:bb', async(request, response) =>{
     const bb= request.params.bb.split(',');
@@ -45,7 +34,7 @@ app.get('/nearby/:bb', async(request, response) =>{
 
 app.get('/users/:city', async(request, response) =>{
     let city= request.params.city;
-    city= city.noAccents;
+    city= city.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     const users_url= `https://api.github.com/search/users?q=location%3A"${city}"`;
     // console.log(users_url);
     //Seattle,WA example
