@@ -46,6 +46,10 @@ button:focus{
   outline: 2px solid white;
 }
 
+.cant-click:hover{
+  background-color: #d9edf7;
+}
+
 div {
   border-radius: 5px;
   font-size: 1rem;

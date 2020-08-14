@@ -124,6 +124,7 @@ function disableGetMap() {
     const getMapButton = document.getElementById('get-map');
     getMapButton.disabled = true;
     getMapButton.style.cursor = "default";
+    getMapButton.classList.add("cant-click");
     
     if(isMobile){
         getMapButton.style.width='90%';
@@ -139,6 +140,7 @@ function disableGetMap() {
         }
         getMapButton.disabled = false;
         getMapButton.style.cursor = "pointer";
+        getMapButton.classList.remove("cant-click");
         getMapButton.textContent = "Get Map of GitHub Users";
     }, 20000);
 }
