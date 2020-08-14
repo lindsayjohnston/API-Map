@@ -83,7 +83,7 @@ function addSpinner(element, message) {
     } else {
         element.style.width='600px';
     }
-    element.style.border='1px solid #ced4da'
+    element.style.display='block';
     element.style.backgroundColor = 'white';
     element.style.padding = "15px";
     element.innerHTML += `${message} <i id="spinner" class="fa fa-spinner fa-pulse" aria-hidden="true"></i>`;
@@ -116,6 +116,7 @@ function reloadData() {
     geonamesFail=0;
     document.getElementById('map').innerHTML = '';
     document.getElementById('message').innerHTML = '';
+    document.getElementById('message').style.display = 'none';
     document.getElementById('map-div').style.display = 'none';
 }
 
