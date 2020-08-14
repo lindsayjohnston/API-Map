@@ -30,14 +30,21 @@ input, button{
   border-radius: .25rem;
 }
 
+input:focus{
+  outline: 2px solid white;
+}
 
 button {
   cursor: pointer;
-  
+  background-color: #d9edf7;
+}
+
+button:hover{
+  background-color: #8ed4f7;
 }
 
 button:focus{
-  outline-color: lightblue;
+  outline: 2px solid white;
 }
 
 div {
@@ -52,10 +59,13 @@ div {
   display: block;
 
 }
+#message, #map-div{
+  border: 1px solid #ced4da;
+}
 
 
 #message, #error{
-  margin: 5px;
+  margin: 15px 5px;
   text-align: center;
 }
 
@@ -102,7 +112,7 @@ div {
 }
 
 #marker-explanation{
-  margin: 10px 0 5px 0;
+  margin: 20px 0 10px 0;
 }
 
 #map {
@@ -123,6 +133,8 @@ footer {
 
   #description{
     width: 90%;
+
+
   }
 
   #main{
