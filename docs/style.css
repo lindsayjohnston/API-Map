@@ -8,7 +8,7 @@ body{
   font-family: 'Noto Sans', sans-serif;
   background-color: #f5f5f5;
   color:  #495057;
-  height: 90vh;
+  min-height: 90vh;
 }
 
 span {
@@ -100,7 +100,6 @@ div {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 90vh;
   background-color: #f5f5f5;
   margin-top: 5px;
 }
