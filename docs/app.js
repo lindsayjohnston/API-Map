@@ -83,7 +83,6 @@ function addSpinner(element, message) {
     } else {
         element.style.width='600px';
     }
-    element.style.boxShadow= '0 4px 8px 0 rgba(0,0,0,0.2);'
     element.style.border='1px solid #ced4da'
     element.style.backgroundColor = 'white';
     element.style.padding = "15px";
