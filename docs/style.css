@@ -61,6 +61,7 @@ div {
 }
 #map-div{
   border: 1px solid #ced4da;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
 
