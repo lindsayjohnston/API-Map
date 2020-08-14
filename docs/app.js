@@ -57,11 +57,11 @@ function clearText(area) {
 function addError(element, message, clear) {
     element.style.display = "block";
     element.style.padding = '5px';
-    element.style.backgroundColor = 'rgb(231, 59, 47)';
+    element.style.backgroundColor = '#FFBABA';
     if(isMobile){
         element.style.width='90%';
     } else {
-        element.style.width='600px';
+        element.style.width='350px';
     }
     element.style.marginTop = '10px';
     element.innerHTML = `${message}`;
