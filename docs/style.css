@@ -60,7 +60,6 @@ div {
 
 }
 #map-div{
-  border: 1px solid #ced4da;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
@@ -70,8 +69,10 @@ div {
   margin: 5px 10px;
   padding: 15px;
   text-align: center;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+
 }
+
+
 
 
 #header, #input-div{
@@ -137,8 +138,6 @@ footer {
 
   #description{
     width: 90%;
-
-
   }
 
   #main{
@@ -167,8 +166,14 @@ footer {
     height: 90%;
   }
 
+  button{
+    width: 90%;
+  }
+
   #message{
-    font-size: .5rem;
+    font-size: .75rem;
+    width: 90%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   }
 
   #map{
