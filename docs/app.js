@@ -83,8 +83,9 @@ function addSpinner(element, message) {
     } else {
         element.style.width='600px';
     }
+    element.style.border='1px solid #ced4da'
     element.style.backgroundColor = 'white';
-    element.style.padding = "5px";
+    element.style.padding = "15px";
     element.innerHTML += `${message} <i id="spinner" class="fa fa-spinner fa-pulse" aria-hidden="true"></i>`;
     element.style.display='block';
 }
