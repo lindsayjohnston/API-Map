@@ -502,8 +502,6 @@ function createMarker(latLng, cityName, numberOfUsers) {
         animation: google.maps.Animation.DROP,
         title: info,
         name: formattedCity,
-        id: info,
-        class: "marker"
     });
 
     marker.addListener('click', markerClickHandler);
@@ -516,8 +514,8 @@ function createMarker(latLng, cityName, numberOfUsers) {
 }
 
 function markerClickHandler(event){
+    console.log(event.target.title);
     for(let i=0; i< markerArray.length; i++){
-        let markersElements=document.getElementsByClassName('marker');
         for (let k=0; k< markersElements.length; k++){
             if(markersElements[k].title===markerArray[i].title){
                 windowArray[i].open(map, markerArray[i]);
