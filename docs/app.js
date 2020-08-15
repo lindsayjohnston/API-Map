@@ -531,9 +531,9 @@ function markerClickHandler(event){
             setTimeout(()=>{
                 windowArray[i].close(map, markerArray[i]);
             }, 5000);
+        } else {
+            windowArray[i].close(map, markerArray[i]);
         };
-      
-        
     };
 
 
