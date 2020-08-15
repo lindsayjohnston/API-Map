@@ -525,7 +525,7 @@ function createMarker(latLng, cityName, numberOfUsers) {
 
 
 function markerClickHandler(event){
-    console.log(event);
+    console.log(event.target);
 }
 
 // infoWindow.open(map, marker);
