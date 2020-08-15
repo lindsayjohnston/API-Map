@@ -56,7 +56,6 @@ function clearText(area) {
 
 function addError(element, message, clear) {
     element.style.display = "block";
-    
     // if(isMobile){
     //     element.style.width='90%';
     // } else {
@@ -488,8 +487,8 @@ function getTop5(array) {
 async function getMap(cityArray) {
     document.getElementById('map-div').style.display = 'flex';
     if(isMobile){
-        document.getElementById('map-div').style.width='90%';
-        document.getElementById('map-div').style.height= '50vh';
+        // document.getElementById('map-div').style.width='90%';
+        // document.getElementById('map-div').style.height= '50vh';
         document.getElementById('message').style.display='none';
     } 
 
