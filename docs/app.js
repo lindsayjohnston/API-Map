@@ -515,7 +515,7 @@ function createMarker(latLng, cityName, numberOfUsers) {
     //onClick open corresponding marker
 
 
-    marker.addListener('click', markerClickHandler(marker.name));
+    marker.addListener('click', markerClickHandler);
     markerArray.push(marker);
     infoWindow = new google.maps.InfoWindow({
             content: marker.title
@@ -524,8 +524,9 @@ function createMarker(latLng, cityName, numberOfUsers) {
 }
 
 
-function markerClickHandler(name){
-    console.log(name);
+function markerClickHandler(event){
+    console.log(markerArray);
+    console.log(event);
 }
 
 // infoWindow.open(map, marker);
