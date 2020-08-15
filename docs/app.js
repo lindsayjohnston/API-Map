@@ -1,4 +1,4 @@
-let isMobile=false;
+let isMobile = false;
 const cityBB = {
     north: 0,
     south: 0,
@@ -22,8 +22,8 @@ let verifiedCities = [];
 let geoCodeTally = 0;
 let citiesLatLng = [];
 let gitHubNumbersArray = [];
-let markerArray=[];
-let windowArray=[];
+let markerArray = [];
+let windowArray = [];
 
 //FOR GOOGLE MAPS API
 let map;
@@ -35,9 +35,9 @@ document.getElementById('get-map').addEventListener('click', getChosenLatLng);
 document.getElementById('city-input').addEventListener('keydown', guessCity);
 document.getElementById('city-input').addEventListener('click', (event) => { event.target.value = ""; });
 
-function checkViewport(){
-    if(window.innerWidth <= 750){
-        isMobile=true;
+function checkViewport() {
+    if (window.innerWidth <= 750) {
+        isMobile = true;
     }
 }
 
@@ -63,7 +63,7 @@ function addError(element, message, clear) {
     // } else {
     //     element.style.width='350px';
     // }
-    
+
     element.innerHTML = `${message}`;
     errorMessage = true;
     if (clear === true) {
@@ -77,7 +77,7 @@ function clearError(element) {
 }
 
 function addSpinner(element, message) {
-    element.style.display='block';
+    element.style.display = 'block';
     element.innerHTML += `${message} <i id="spinner" class="fa fa-spinner fa-pulse" aria-hidden="true"></i>`;
 }
 
@@ -104,9 +104,9 @@ function reloadData() {
     gettingTop5 = false;
     gitHubFailIndex = -1;
     gitHubSuccess = 0;
-    geonamesFail=0;
-    markerArray=[];
-    windowArray=[];
+    geonamesFail = 0;
+    markerArray = [];
+    windowArray = [];
     document.getElementById('map').innerHTML = '';
     document.getElementById('message').innerHTML = '';
     document.getElementById('message').style.display = 'none';
@@ -118,7 +118,7 @@ function disableGetMap() {
     getMapButton.disabled = true;
     getMapButton.style.cursor = "default";
     getMapButton.classList.add("cant-click");
-  
+
     getMapButton.textContent = "Upgrade to Premium to make more requests per minute!";
     setTimeout(() => {
         getMapButton.disabled = false;
@@ -135,7 +135,7 @@ function getChosenLatLng() {
         addError(document.getElementById('error'), 'Please enter a valid city!');
     } else {
         let inputArray = input.split(', ');
-        let cityNoAccents= inputArray[0].normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        let cityNoAccents = inputArray[0].normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
         chosenCity = cityNoAccents;
         chosenState = inputArray[1];
@@ -155,10 +155,10 @@ function getChosenLatLng() {
             const geocoder1 = new google.maps.Geocoder();
             geocoder1.geocode(geocoderRequest, function (array, status) {
                 //change name to english name
-                array[0]['address_components'].forEach(object=>{
-                    object.types.forEach(type=>{
-                        if(type==="locality"){
-                            chosenCity=object.short_name;
+                array[0]['address_components'].forEach(object => {
+                    object.types.forEach(type => {
+                        if (type === "locality") {
+                            chosenCity = object.short_name;
                         }
                     })
                 })
@@ -255,15 +255,15 @@ function checkNearbyCities() {
     }
 }
 
-function specialCharacterClean(array){
-    array.forEach((city, index)=>{
-        city= city.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        try{
-            city=decodeURI(city);
-        } catch(error){
+function specialCharacterClean(array) {
+    array.forEach((city, index) => {
+        city = city.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        try {
+            city = decodeURI(city);
+        } catch (error) {
             console.log(error);
         }
-        array[index]=city;
+        array[index] = city;
     });
     return array;
 }
@@ -277,7 +277,7 @@ function verifyCities() {
 
     //make sure there are no special characters in citiesArray
 
-    citiesArray= specialCharacterClean(citiesArray);
+    citiesArray = specialCharacterClean(citiesArray);
 
     citiesArray.forEach(city => {
         let geocoderRequest = {
@@ -427,7 +427,7 @@ async function getGitHubNumbers(cityNamesUrlArray, failIndex) {
         }, 36000);
 
     }
- 
+
 };
 
 //FIND TOP 5 CITIES BY HIGHEST NUMBER OF GITHUB USERS
@@ -467,9 +467,9 @@ function getTop5(array) {
 //GENERATE GOOGLE MAP
 async function getMap(cityArray) {
     document.getElementById('map-div').style.display = 'flex';
-    if(isMobile){
-        document.getElementById('message').style.display='none';
-    } 
+    if (isMobile) {
+        document.getElementById('message').style.display = 'none';
+    }
 
     map = new google.maps.Map(
         document.getElementById('map'),
@@ -484,7 +484,7 @@ async function getMap(cityArray) {
 //GENERATE CLICKABLE MARKERS FOR MAP
 function createMarker(latLng, cityName, numberOfUsers) {
     //FORMAT CITY AS "CITY, STATE"
-    
+
     let cityArray = cityName.split(" ");
     let formattedCity = cityArray[0];
     for (let i = 1; i < cityArray.length; i++) {
@@ -494,7 +494,7 @@ function createMarker(latLng, cityName, numberOfUsers) {
             formattedCity += ` ${cityArray[i]}`;
         }
     }
-    let info= `<div id='info'> <p>${numberOfUsers} GitHub Users in ${formattedCity}</p></div>`
+    let info = `<div id='info'> <p>${numberOfUsers} GitHub Users in ${formattedCity}</p></div>`
 
     let marker = new google.maps.Marker({
         map: map,
@@ -508,33 +508,32 @@ function createMarker(latLng, cityName, numberOfUsers) {
     marker.addListener('touchstart', markerClickHandler);
     markerArray.push(marker);
     infoWindow = new google.maps.InfoWindow({
-            content: marker.title
+        content: marker.title
     });
     windowArray.push(infoWindow);
 }
 
-function markerClickHandler(event){
+function markerClickHandler(event) {
     console.log(event);
-   
-    if(event.ub.target.attributes.src === undefined){
-        console.log(event.ub.currentTarget.title); //DESKTOP
+    let clickedMarker;
+
+    if (event.ub.target.attributes.src === undefined) {
+        clickedMarker = event.ub.currentTarget.title; //DESKTOP
     } else {
-        console.log(event.ub.target.attributes.src.ownerElement.offsetParent.attributes["0"].nodeValue); //FOR MOBILE
+        clickedMarker = event.ub.target.attributes.src.ownerElement.offsetParent.attributes["0"].nodeValue; //FOR MOBILE
     }
-   
-    
-    
-    for(let i=0; i< markerArray.length; i++){
-        for (let k=0; k< markersElements.length; k++){
-            if(markersElements[k].title===markerArray[i].title){
-                windowArray[i].open(map, markerArray[i]);
-                setTimeout(()=>{
-                    windowArray[i].close(map, markerArray[i]);
-                }, 5000);
-            } else {
+
+
+
+    for (let i = 0; i < markerArray.length; i++) {
+        if (clickedMarker === markerArray[i].title) {
+            windowArray[i].open(map, markerArray[i]);
+            setTimeout(() => {
                 windowArray[i].close(map, markerArray[i]);
-            };
-        }
+            }, 5000);
+        } else {
+            windowArray[i].close(map, markerArray[i]);
+        };
     };
 
 }
