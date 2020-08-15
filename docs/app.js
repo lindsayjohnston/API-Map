@@ -525,7 +525,7 @@ function createMarker(latLng, cityName, numberOfUsers) {
     });
 
     marker.addListener('click', function () {
-        console.log(this.title);
+        console.log(marker.title);
         if (infoWindow !== undefined){
             infoWindow.close(map, marker);
         }
@@ -533,7 +533,10 @@ function createMarker(latLng, cityName, numberOfUsers) {
             content: marker.title
         })
         infoWindow.open(map, marker);
-        setTimeout(()=>{infoWindow.close(map, marker);}, 4000);
+        setTimeout(()=>{
+            if()
+            infoWindow.close(map, marker);
+        }, 4000);
     });
 
 
