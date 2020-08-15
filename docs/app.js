@@ -126,18 +126,18 @@ function disableGetMap() {
     getMapButton.style.cursor = "default";
     getMapButton.classList.add("cant-click");
     
-    if(isMobile){
-        getMapButton.style.width='90%';
-    } else {
-        getMapButton.style.width='350px';
-    }
+    // if(isMobile){
+    //     getMapButton.style.width='90%';
+    // } else {
+    //     getMapButton.style.width='350px';
+    // }
     getMapButton.textContent = "Upgrade to Premium to make more requests per minute!";
     setTimeout(() => {
-        if(isMobile){
-            getMapButton.style.width='90%';
-        } else {
-            getMapButton.style.width='350px';
-        }
+        // if(isMobile){
+        //     getMapButton.style.width='90%';
+        // } else {
+        //     getMapButton.style.width='350px';
+        // }
         getMapButton.disabled = false;
         getMapButton.style.cursor = "pointer";
         getMapButton.classList.remove("cant-click");
