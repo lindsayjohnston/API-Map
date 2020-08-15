@@ -518,9 +518,9 @@ function markerClickHandler(event){
     for(let i=0; i< markerArray.length; i++){
         document.getElementById('main').style.backgroundColor="red"; //getting in here
         document.getElementById('marker-explanation').textContent= 
-        "test";
+        `Event title: ${event.ub.path[0].title} /// Array title: ${markerArray[i].title} `;
 
-        // `Event title: ${event.ub.path[0].title} /// Array title: ${markerArray[i].title} `;
+        
 
         if(event.ub.path[0].title === markerArray[i].title){
             
