@@ -514,7 +514,7 @@ function createMarker(latLng, cityName, numberOfUsers) {
 }
 
 function markerClickHandler(event){
-    console.log(event.target.title);
+    console.log(event);
     for(let i=0; i< markerArray.length; i++){
         for (let k=0; k< markersElements.length; k++){
             if(markersElements[k].title===markerArray[i].title){
