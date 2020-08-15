@@ -521,7 +521,8 @@ function createMarker(latLng, cityName, numberOfUsers) {
         map: map,
         position: latLng,
         animation: google.maps.Animation.DROP,
-        title: info
+        title: info,
+        name: formattedCity
     });
 
     marker.addListener('click', function () {
