@@ -515,6 +515,8 @@ function createMarker(latLng, cityName, numberOfUsers) {
 
 function markerClickHandler(event){
     console.log(event);
+    console.log(this.ub.target.attributes.src.ownerElement.offsetParent.attributes["0"].nodeValue);
+    
     for(let i=0; i< markerArray.length; i++){
         for (let k=0; k< markersElements.length; k++){
             if(markersElements[k].title===markerArray[i].title){
