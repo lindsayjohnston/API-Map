@@ -527,11 +527,10 @@ function createMarker(latLng, cityName, numberOfUsers) {
 function markerClickHandler(event){
     console.log(markerArray);
     for(let i=0; i< markerArray.length; i++){
-        if(markerArray[i].title ===event.ub.path[0].attributes.textContent){
-            console.log(markerArray[i].title);
-        } else {
-            console.log('fail');
-        }
+
+        console.log("event " + event.ub.path[0].attributes.textContent);
+        console.log("marker array element" + markerArray[i].title);
+        
     }
 
 
