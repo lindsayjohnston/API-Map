@@ -522,11 +522,11 @@ function createMarker(latLng, cityName, numberOfUsers) {
         position: latLng,
         animation: google.maps.Animation.DROP,
         title: info,
-        name: formattedCity
+        name: formattedCity,
+        open:true
     });
 
     marker.addListener('click', function () {
-        console.log(marker.name);
         if (infoWindow !== undefined){
             infoWindow.close(map, marker);
         }
@@ -535,8 +535,11 @@ function createMarker(latLng, cityName, numberOfUsers) {
         })
         infoWindow.open(map, marker);
         setTimeout(()=>{
-            console.log("Closing " + marker.name);
-            infoWindow.close(map, marker);
+            if(marker.open){
+                console.log("Closing " + marker.name);
+                infoWindow.close(map, marker);
+            }
+        
         }, 4000);
     });
 
