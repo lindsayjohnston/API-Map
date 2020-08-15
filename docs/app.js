@@ -22,6 +22,8 @@ let verifiedCities = [];
 let geoCodeTally = 0;
 let citiesLatLng = [];
 let gitHubNumbersArray = [];
+let markerArray=[];
+let windowArray=[];
 
 //FOR GOOGLE MAPS API
 let map;
@@ -75,17 +77,8 @@ function clearError(element) {
 }
 
 function addSpinner(element, message) {
-    
-    // if(isMobile){
-    //     element.style.width='90%';
-    // } else {
-    //     element.style.width='600px';
-    // }
     element.style.display='block';
-    // element.style.backgroundColor = 'white';
-    // element.style.padding = "15px";
     element.innerHTML += `${message} <i id="spinner" class="fa fa-spinner fa-pulse" aria-hidden="true"></i>`;
-   
 }
 
 function addCheck(element) {
@@ -112,6 +105,8 @@ function reloadData() {
     gitHubFailIndex = -1;
     gitHubSuccess = 0;
     geonamesFail=0;
+    markerArray=[];
+    windowArray=[];
     document.getElementById('map').innerHTML = '';
     document.getElementById('message').innerHTML = '';
     document.getElementById('message').style.display = 'none';
@@ -123,19 +118,9 @@ function disableGetMap() {
     getMapButton.disabled = true;
     getMapButton.style.cursor = "default";
     getMapButton.classList.add("cant-click");
-    
-    // if(isMobile){
-    //     getMapButton.style.width='90%';
-    // } else {
-    //     getMapButton.style.width='350px';
-    // }
+  
     getMapButton.textContent = "Upgrade to Premium to make more requests per minute!";
     setTimeout(() => {
-        // if(isMobile){
-        //     getMapButton.style.width='90%';
-        // } else {
-        //     getMapButton.style.width='350px';
-        // }
         getMapButton.disabled = false;
         getMapButton.style.cursor = "pointer";
         getMapButton.classList.remove("cant-click");
@@ -259,7 +244,6 @@ async function getNearbyCities(bb) {
     }
 }
 
-
 function checkNearbyCities() {
     //citiesArray.length should match number of rows requested from GeoNames API + 1 for chosen City
     if (citiesArray.length !== 10 && !usingDummyData) {
@@ -372,7 +356,6 @@ function deleteCityDuplicates() {
     prepForGitHub();
 }
 
-
 function prepForGitHub() {
     if (!gettingGitHubUsers) {
         addCheck(document.getElementById('message'));
@@ -446,8 +429,6 @@ async function getGitHubNumbers(cityNamesUrlArray, failIndex) {
     }
  
 };
-
-
 
 //FIND TOP 5 CITIES BY HIGHEST NUMBER OF GITHUB USERS
 function getTop5(array) {
@@ -523,28 +504,36 @@ function createMarker(latLng, cityName, numberOfUsers) {
         animation: google.maps.Animation.DROP,
         title: info,
         name: formattedCity,
-        open:false
+        open: false
     });
+    
+    //push marker to markerArray
+    
+   
+    //make infoWindow
+    //push infoWindow to array
+    //onClick open corresponding marker
 
-    marker.addListener('click', function () {
-        if (infoWindow !== undefined){
-            infoWindow.close(map, marker);
-            marker.open=false;
-        }
-        infoWindow = new google.maps.InfoWindow({
+
+    marker.addListener('click', markerClickHandler);
+    markerArray.push(marker);
+    infoWindow = new google.maps.InfoWindow({
             content: marker.title
-        })
-        infoWindow.open(map, marker);
-        marker.open=true;
-        setTimeout(()=>{
-            if(marker.open){
-                console.log("Closing " + marker.name);
-                infoWindow.close(map, marker);
-            }
-        
-        }, 4000);
     });
-
-
+    windowArray.push(infoWindow);
 }
 
+
+function markerClickHandler(event){
+    console.log(event);
+}
+
+// infoWindow.open(map, marker);
+//         marker.open=true;
+//         setTimeout(()=>{
+//             if(marker.open){
+//                 console.log("Closing " + marker.name);
+//                 infoWindow.close(map, marker);
+//             }
+        
+//         }, 4000);
