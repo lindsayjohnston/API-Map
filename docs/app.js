@@ -502,7 +502,8 @@ function createMarker(latLng, cityName, numberOfUsers) {
         animation: google.maps.Animation.DROP,
         title: info,
         name: formattedCity,
-        open: false
+        id: info,
+        class: "marker"
     });
 
     marker.addListener('click', markerClickHandler);
@@ -516,21 +517,17 @@ function createMarker(latLng, cityName, numberOfUsers) {
 
 function markerClickHandler(event){
     for(let i=0; i< markerArray.length; i++){
-        document.getElementById('main').style.backgroundColor="red"; //getting in here
-        document.getElementById('marker-explanation').textContent= 
-        `Event title: ${event.ub.path}`;
-
-        
-
-        if(event.ub.path[0].title === markerArray[i].title){
-            
-            windowArray[i].open(map, markerArray[i]);
-            setTimeout(()=>{
+        let markersElements=document.getElementsByClassName('marker');
+        for (let k=0; k< markersElements.length; k++){
+            if(markersElements[k].title===markerArray[i].title){
+                windowArray[i].open(map, markerArray[i]);
+                setTimeout(()=>{
+                    windowArray[i].close(map, markerArray[i]);
+                }, 5000);
+            } else {
                 windowArray[i].close(map, markerArray[i]);
-            }, 5000);
-        } else {
-            windowArray[i].close(map, markerArray[i]);
-        };
+            };
+        }
     };
 
 }
