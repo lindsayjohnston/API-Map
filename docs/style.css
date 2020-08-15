@@ -182,7 +182,8 @@ a{
   }
 
   #map-div{
-    width: 90%;
+    width: 90vw;
+    height: 90vw;
   }
 
   #map{
