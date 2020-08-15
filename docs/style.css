@@ -197,5 +197,7 @@ a{
 
   #info{
     text-align: center;
+    width: fit-content;
+    height: fit-content;
   }
 }

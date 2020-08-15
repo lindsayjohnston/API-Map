@@ -523,8 +523,6 @@ function markerClickHandler(event) {
         clickedMarker = event.ub.target.attributes.src.ownerElement.offsetParent.attributes["0"].nodeValue; //FOR MOBILE
     }
 
-
-
     for (let i = 0; i < markerArray.length; i++) {
         if (clickedMarker === markerArray[i].title) {
             windowArray[i].open(map, markerArray[i]);
