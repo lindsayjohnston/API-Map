@@ -517,6 +517,7 @@ function createMarker(latLng, cityName, numberOfUsers) {
 }
 
 function markerClickHandler(event){
+    document.getElementById("main").style.backgroundColor="red";
     for(let i=0; i< markerArray.length; i++){
         if(event.ub.path[0].title === markerArray[i].title){
             windowArray[i].open(map, markerArray[i]);
