@@ -198,5 +198,6 @@ a{
   #info{
     text-align: center;
     background-color: lightgreen;
+    margin: 0px;
   }
 }
