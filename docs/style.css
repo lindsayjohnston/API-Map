@@ -197,7 +197,14 @@ a{
 
   #info{
     text-align: center;
-    background-color: lightgreen;
+  }
+
+  .gm-style-iw-d {
+    padding: 0px;
+    margin: 0px;
+  }
+  .gm-style-iw-d > div {
+    padding: 0px;
     margin: 0px;
   }
 }
