@@ -525,6 +525,9 @@ function createMarker(latLng, cityName, numberOfUsers) {
     });
 
     marker.addListener('click', function () {
+        if (infoWindow !== undefined){
+            infoWindow.close(map, marker);
+        }
         infoWindow = new google.maps.InfoWindow({
             content: marker.title
         })
