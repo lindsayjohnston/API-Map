@@ -515,7 +515,9 @@ function createMarker(latLng, cityName, numberOfUsers) {
 
 function markerClickHandler(event){
     console.log(event);
-    console.log(event.ub.target.attributes.src.ownerElement.offsetParent.attributes["0"].nodeValue);
+    console.log(event.ub.target.attributes.src.ownerElement.offsetParent.attributes["0"].nodeValue); //FOR MOBILE
+    console.log(event.ub.currentTarget.title);//FOR DESKTOP
+    
     
     for(let i=0; i< markerArray.length; i++){
         for (let k=0; k< markersElements.length; k++){
