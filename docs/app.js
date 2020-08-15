@@ -535,6 +535,7 @@ function createMarker(latLng, cityName, numberOfUsers) {
         })
         infoWindow.open(map, marker);
         setTimeout(()=>{
+            console.log("Closing " + marker.name);
             infoWindow.close(map, marker);
         }, 4000);
     });
