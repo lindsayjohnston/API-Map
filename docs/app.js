@@ -525,11 +525,14 @@ function createMarker(latLng, cityName, numberOfUsers) {
 
 
 function markerClickHandler(event){
-    console.log(markerArray);
     for(let i=0; i< markerArray.length; i++){
-
-        console.log("event " + event.ub.path[0].title);
-        console.log("marker array element" + markerArray[i].title);
+        if(event.ub.path[0].title === markerArray[i].title){
+            windowArray[i].open(map, markerArray[i]);
+            setTimeout(()=>{
+                windowArray[i].close(map, markerArray[i]);
+            }, 5000);
+        };
+      
         
     };
 
