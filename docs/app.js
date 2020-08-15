@@ -518,7 +518,7 @@ function markerClickHandler(event){
     for(let i=0; i< markerArray.length; i++){
         document.getElementById('main').style.backgroundColor="red"; //getting in here
         document.getElementById('marker-explanation').textContent= 
-        `Event title: ${event.ub.path[0].title} /// Array title: ${markerArray[i].title} `;
+        `Event title: ${event.target}`;
 
         
 
