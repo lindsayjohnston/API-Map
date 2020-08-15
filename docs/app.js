@@ -526,7 +526,16 @@ function createMarker(latLng, cityName, numberOfUsers) {
 
 function markerClickHandler(event){
     console.log(markerArray);
-    console.log(event);
+    for(let i=0; i< markerArray.length; i++){
+        if(markerArray[i].title ===event.ub.path[0].attributes.textContent){
+            console.log(markerArray[i].title);
+        } else {
+            console.log('fail');
+        }
+    }
+
+
+    // event.ub.path[0].attributes.textContent =<div id='info'> <p>${numberOfUsers} GitHub Users in ${formattedCity}</p></div>
 }
 
 // infoWindow.open(map, marker);
