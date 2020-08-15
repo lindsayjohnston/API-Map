@@ -528,10 +528,10 @@ function markerClickHandler(event){
     console.log(markerArray);
     for(let i=0; i< markerArray.length; i++){
 
-        console.log("event " + event.ub.path[0].attributes.textContent);
+        console.log("event " + event.ub.path[0].title);
         console.log("marker array element" + markerArray[i].title);
         
-    }
+    };
 
 
     // event.ub.path[0].attributes.textContent =<div id='info'> <p>${numberOfUsers} GitHub Users in ${formattedCity}</p></div>
