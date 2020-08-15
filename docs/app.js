@@ -529,7 +529,7 @@ function createMarker(latLng, cityName, numberOfUsers) {
             content: marker.title
         })
         infoWindow.open(map, marker);
-        setTimeout(()=>{infoWindow.close(map, marker);}, 2000);
+        setTimeout(()=>{infoWindow.close(map, marker);}, 4000);
     });
 
 
