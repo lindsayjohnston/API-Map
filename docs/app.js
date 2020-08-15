@@ -515,8 +515,13 @@ function createMarker(latLng, cityName, numberOfUsers) {
 
 function markerClickHandler(event){
     console.log(event);
-    console.log(event.ub.target.attributes.src.ownerElement.offsetParent.attributes["0"].nodeValue); //FOR MOBILE
-    console.log(event.ub.currentTarget.title);//FOR DESKTOP
+   
+    if(event.ub.target.attributes.src === undefined){
+        console.log(event.ub.currentTarget.title); //DESKTOP
+    } else {
+        console.log(event.ub.target.attributes.src.ownerElement.offsetParent.attributes["0"].nodeValue); //FOR MOBILE
+    }
+   
     
     
     for(let i=0; i< markerArray.length; i++){
