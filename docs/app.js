@@ -523,17 +523,19 @@ function createMarker(latLng, cityName, numberOfUsers) {
         animation: google.maps.Animation.DROP,
         title: info,
         name: formattedCity,
-        open:true
+        open:false
     });
 
     marker.addListener('click', function () {
         if (infoWindow !== undefined){
             infoWindow.close(map, marker);
+            marker.open=false;
         }
         infoWindow = new google.maps.InfoWindow({
             content: marker.title
         })
         infoWindow.open(map, marker);
+        marker.open=true;
         setTimeout(()=>{
             if(marker.open){
                 console.log("Closing " + marker.name);
