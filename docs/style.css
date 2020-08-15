@@ -157,7 +157,7 @@ a{
   }
 
   #description{
-    width: 90%;
+    width: 90vw;
   }
 
   #main{
@@ -178,7 +178,7 @@ a{
   }
 
   #city-input, button, #message, #error{
-    width: 90%;
+    width: 90vw;
   }
 
   #map-div{
