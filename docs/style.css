@@ -47,12 +47,11 @@ button:focus{
 }
 
 .cant-click{
-  background-color: lightgray;
-  font-style: italic;
+  background-color: rgb(225, 226, 226);
 }
 
 .cant-click:hover{
-  background-color: lightgray;
+  background-color: rgb(225, 226, 226);
 }
 
 div {
