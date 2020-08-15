@@ -506,14 +506,6 @@ function createMarker(latLng, cityName, numberOfUsers) {
         name: formattedCity,
         open: false
     });
-    
-    //push marker to markerArray
-    
-   
-    //make infoWindow
-    //push infoWindow to array
-    //onClick open corresponding marker
-
 
     marker.addListener('click', markerClickHandler);
     markerArray.push(marker);
@@ -522,7 +514,6 @@ function createMarker(latLng, cityName, numberOfUsers) {
     });
     windowArray.push(infoWindow);
 }
-
 
 function markerClickHandler(event){
     for(let i=0; i< markerArray.length; i++){
@@ -536,16 +527,5 @@ function markerClickHandler(event){
         };
     };
 
-
-    // event.ub.path[0].attributes.textContent =<div id='info'> <p>${numberOfUsers} GitHub Users in ${formattedCity}</p></div>
 }
 
-// infoWindow.open(map, marker);
-//         marker.open=true;
-//         setTimeout(()=>{
-//             if(marker.open){
-//                 console.log("Closing " + marker.name);
-//                 infoWindow.close(map, marker);
-//             }
-        
-//         }, 4000);
