@@ -525,7 +525,7 @@ function createMarker(latLng, cityName, numberOfUsers) {
     });
 
     marker.addListener('click', function () {
-        console.log(marker.title);
+        console.log(marker.position);
         if (infoWindow !== undefined){
             infoWindow.close(map, marker);
         }
