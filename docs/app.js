@@ -56,14 +56,13 @@ function clearText(area) {
 
 function addError(element, message, clear) {
     element.style.display = "block";
-    element.style.padding = '5px';
-    element.style.backgroundColor = '#FFBABA';
-    if(isMobile){
-        element.style.width='90%';
-    } else {
-        element.style.width='350px';
-    }
-    element.style.marginTop = '10px';
+    
+    // if(isMobile){
+    //     element.style.width='90%';
+    // } else {
+    //     element.style.width='350px';
+    // }
+    
     element.innerHTML = `${message}`;
     errorMessage = true;
     if (clear === true) {
@@ -78,16 +77,16 @@ function clearError(element) {
 
 function addSpinner(element, message) {
     
-    if(isMobile){
-        element.style.width='90%';
-    } else {
-        element.style.width='600px';
-    }
+    // if(isMobile){
+    //     element.style.width='90%';
+    // } else {
+    //     element.style.width='600px';
+    // }
     element.style.display='block';
-    element.style.backgroundColor = 'white';
-    element.style.padding = "15px";
+    // element.style.backgroundColor = 'white';
+    // element.style.padding = "15px";
     element.innerHTML += `${message} <i id="spinner" class="fa fa-spinner fa-pulse" aria-hidden="true"></i>`;
-    element.style.display='block';
+   
 }
 
 function addCheck(element) {

@@ -72,10 +72,17 @@ div {
   margin: 5px 10px;
   padding: 15px;
   text-align: center;
-
+  width: 350px;
 }
 
+#message {
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
 
+#error{
+  background-color: '#FFBABA';
+}
 
 
 #header, #input-div{
@@ -168,19 +175,13 @@ a{
     margin-top: 0px;
   }
 
-  #city-input, button{
+  #city-input, button, #message, #error{
     width: 90%;
   }
 
   #map-div{
     width: 90%;
     height: 90%;
-  }
-
-  #message{
-    /* font-size: .75rem; */
-    width: 90%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   }
 
   #map{
