@@ -516,11 +516,11 @@ function createMarker(latLng, cityName, numberOfUsers) {
 
 function markerClickHandler(event){
     for(let i=0; i< markerArray.length; i++){
-        style.backgroundColor="red";
+        document.getElementById('main').style.backgroundColor="red";
         addError(document.getElementById('error'), `Event title: ${event.ub.path[0].title} /// Array title: ${markerArray[i].title} `);
 
         if(event.ub.path[0].title === markerArray[i].title){
-            document.getElementById('main').
+            
             windowArray[i].open(map, markerArray[i]);
             setTimeout(()=>{
                 windowArray[i].close(map, markerArray[i]);
