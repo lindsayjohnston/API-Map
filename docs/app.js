@@ -468,8 +468,6 @@ function getTop5(array) {
 async function getMap(cityArray) {
     document.getElementById('map-div').style.display = 'flex';
     if(isMobile){
-        // document.getElementById('map-div').style.width='90%';
-        // document.getElementById('map-div').style.height= '50vh';
         document.getElementById('message').style.display='none';
     } 
 
@@ -518,9 +516,11 @@ function createMarker(latLng, cityName, numberOfUsers) {
 
 function markerClickHandler(event){
     for(let i=0; i< markerArray.length; i++){
+        style.backgroundColor="red";
         addError(document.getElementById('error'), `Event title: ${event.ub.path[0].title} /// Array title: ${markerArray[i].title} `);
+
         if(event.ub.path[0].title === markerArray[i].title){
-            document.getElementById('main').style.backgroundColor="red";
+            document.getElementById('main').
             windowArray[i].open(map, markerArray[i]);
             setTimeout(()=>{
                 windowArray[i].close(map, markerArray[i]);
