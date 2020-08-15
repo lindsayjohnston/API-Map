@@ -507,7 +507,7 @@ function createMarker(latLng, cityName, numberOfUsers) {
         open: false
     });
 
-    marker.addListener('click', markerClickHandler);
+    marker.addEventListener('click', markerClickHandler);
     markerArray.push(marker);
     infoWindow = new google.maps.InfoWindow({
             content: marker.title
