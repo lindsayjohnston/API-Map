@@ -5,4 +5,4 @@ I used this project to hone my skills with APIs. Using geolocation services, Goo
 
 ## Link to project:
 
-[Click here to see the project](https://github-map-real.herokuapp.com/)
+[Click here to see the project.](https://github-map-real.herokuapp.com/)
