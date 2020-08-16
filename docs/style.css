@@ -153,6 +153,11 @@ a{
   text-decoration: none;
   color:  #8ed4f7;
 }
+
+.pac-icon .pac-icon marker{
+  display: none;
+}
+
 /* MOBILE DEVICES */
 @media only screen and (max-width: 750px){
   
@@ -199,12 +204,12 @@ a{
     text-align: center;
   }
 
-  .gm-style-iw-d {
+  /* .gm-style-iw-d {
     padding: 0px;
     margin: 0px;
   }
   .gm-style-iw-d > div {
     padding: 0px;
     margin: 0px;
-  }
+  } */
 }
