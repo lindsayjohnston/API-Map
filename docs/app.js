@@ -38,7 +38,9 @@ document.getElementById('city-input').addEventListener('click', (event) => { eve
 function checkViewport() {
     if (window.innerWidth <= 750) {
         isMobile = true;
+        addError(document.getElementById('error'), 'WARNING: This interactive map only functions on a desktop!', true);
     }
+    
 }
 
 //AUTOCOMPLETE CITY
