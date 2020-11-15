@@ -517,6 +517,7 @@ function markerClickHandler(event) {
     console.log(event);
     console.log("test Heroku");
     let clickedMarker;
+    console.log(event.vb.target.attributes.title.value);
 
     if (event.ub.target.attributes.src === undefined) {
         clickedMarker = event.ub.currentTarget.title; //DESKTOP
