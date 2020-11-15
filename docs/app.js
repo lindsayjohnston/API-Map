@@ -515,9 +515,12 @@ function createMarker(latLng, cityName, numberOfUsers) {
 
 function markerClickHandler(event) {
     console.log(event);
-    console.log("test Heroku");
     let clickedMarker;
     console.log(event.vb.target.attributes.title.value);
+    
+    if(clickedMarker === undefined){
+        addError(document.getElementById('error'), 'Please try on a desktop!');
+    }
 
     clickedMarker=event.vb.target.attributes.title.value;
 
