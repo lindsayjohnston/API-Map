@@ -519,11 +519,13 @@ function markerClickHandler(event) {
     let clickedMarker;
     console.log(event.vb.target.attributes.title.value);
 
-    if (event.ub.target.attributes.src === undefined) {
-        clickedMarker = event.ub.currentTarget.title; //DESKTOP
-    } else {
-        clickedMarker = event.ub.target.attributes.src.ownerElement.offsetParent.attributes["0"].nodeValue; //FOR MOBILE
-    }
+    clickedMarker=event.vb.target.attributes.title.value;
+
+    // if (event.ub.target.attributes.src === undefined) {
+    //     clickedMarker = event.ub.currentTarget.title; //DESKTOP
+    // } else {
+    //     clickedMarker = event.ub.target.attributes.src.ownerElement.offsetParent.attributes["0"].nodeValue; //FOR MOBILE
+    // }
 
     for (let i = 0; i < markerArray.length; i++) {
         if (clickedMarker === markerArray[i].title) {
