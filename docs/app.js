@@ -34,6 +34,7 @@ let infoWindow;
 document.getElementById('get-map').addEventListener('click', getChosenLatLng);
 document.getElementById('city-input').addEventListener('keydown', guessCity);
 document.getElementById('city-input').addEventListener('click', (event) => { event.target.value = ""; });
+document.onload(checkViewport);
 
 function checkViewport() {
     if (window.innerWidth <= 750) {
