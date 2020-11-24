@@ -497,23 +497,37 @@ function createMarker(latLng, cityName, numberOfUsers) {
             formattedCity += ` ${cityArray[i]}`;
         }
     }
-    let info = `<div id='info'> <p>${numberOfUsers} GitHub Users in ${formattedCity}</p></div>`
+    let info = `<div id='info'> <p>${numberOfUsers} GitHub Users in ${formattedCity}</p></div>`;
 
-    let marker = new google.maps.Marker({
-        map: map,
-        position: latLng,
-        animation: google.maps.Animation.DROP,
-        title: info,
-        name: formattedCity,
+    const newInfoWindow= new google.maps.InfoWindow({
+        content: info
     });
 
-    marker.addListener('click', markerClickHandler);
-    marker.addListener('touchstart', markerClickHandler);
-    markerArray.push(marker);
-    infoWindow = new google.maps.InfoWindow({
-        content: marker.title
+    const newMarker= new google.maps.Marker({
+        position: latLng, 
+        map,
+        title: formattedCity,
     });
-    windowArray.push(infoWindow);
+
+    newMarker.addListener("click", () =>{
+        newInfoWindow.open(map, newMarker);
+    })
+
+    // let marker = new google.maps.Marker({
+    //     map: map,
+    //     position: latLng,
+    //     animation: google.maps.Animation.DROP,
+    //     title: info,
+    //     name: formattedCity,
+    // });
+
+    // marker.addListener('click', markerClickHandler);
+    // marker.addListener('touchstart', markerClickHandler);
+    // markerArray.push(marker);
+    // infoWindow = new google.maps.InfoWindow({
+    //     content: marker.title
+    // });
+    // windowArray.push(infoWindow);
 }
 
 function markerClickHandler(event) {
