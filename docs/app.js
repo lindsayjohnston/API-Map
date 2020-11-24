@@ -476,7 +476,10 @@ async function getMap(cityArray) {
 
     map = new google.maps.Map(
         document.getElementById('map'),
-        { center: cityArray[0][1], zoom: 4.5 }
+        { 
+            center: cityArray[0][1], zoom: 4.5,
+            mapTypeControl: false, 
+        }
     );
 
     for (let i = 0; i < cityArray.length; i++) {
