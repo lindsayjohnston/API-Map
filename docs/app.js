@@ -516,47 +516,32 @@ function createMarker(latLng, cityName, numberOfUsers) {
         newInfoWindow.open(map, newMarker);
     })
 
-    // let marker = new google.maps.Marker({
-    //     map: map,
-    //     position: latLng,
-    //     animation: google.maps.Animation.DROP,
-    //     title: info,
-    //     name: formattedCity,
-    // });
-
-    // marker.addListener('click', markerClickHandler);
-    // marker.addListener('touchstart', markerClickHandler);
-    // markerArray.push(marker);
-    // infoWindow = new google.maps.InfoWindow({
-    //     content: marker.title
-    // });
-    // windowArray.push(infoWindow);
 }
 
-function markerClickHandler(event) {
-    console.log(event);
-    let clickedMarker;
-    console.log(event.vb.target.attributes.title.value);
+// function markerClickHandler(event) {
+//     console.log(event);
+//     let clickedMarker;
+//     console.log(event.vb.target.attributes.title.value);
 
 
-    clickedMarker=event.vb.target.attributes.title.value;
+//     clickedMarker=event.vb.target.attributes.title.value;
 
-    // if (event.ub.target.attributes.src === undefined) {
-    //     clickedMarker = event.ub.currentTarget.title; //DESKTOP
-    // } else {
-    //     clickedMarker = event.ub.target.attributes.src.ownerElement.offsetParent.attributes["0"].nodeValue; //FOR MOBILE
-    // }
+//     // if (event.ub.target.attributes.src === undefined) {
+//     //     clickedMarker = event.ub.currentTarget.title; //DESKTOP
+//     // } else {
+//     //     clickedMarker = event.ub.target.attributes.src.ownerElement.offsetParent.attributes["0"].nodeValue; //FOR MOBILE
+//     // }
 
-    for (let i = 0; i < markerArray.length; i++) {
-        if (clickedMarker === markerArray[i].title) {
-            windowArray[i].open(map, markerArray[i]);
-            setTimeout(() => {
-                windowArray[i].close(map, markerArray[i]);
-            }, 5000);
-        } else {
-            windowArray[i].close(map, markerArray[i]);
-        };
-    };
+//     for (let i = 0; i < markerArray.length; i++) {
+//         if (clickedMarker === markerArray[i].title) {
+//             windowArray[i].open(map, markerArray[i]);
+//             setTimeout(() => {
+//                 windowArray[i].close(map, markerArray[i]);
+//             }, 5000);
+//         } else {
+//             windowArray[i].close(map, markerArray[i]);
+//         };
+//     };
 
-}
+// }
 
