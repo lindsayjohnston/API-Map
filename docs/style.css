@@ -213,3 +213,8 @@ a{
     margin: 0px;
   } */
 }
+
+.gm-ui-hover-effect {
+  height: 20px;
+  overflow: hidden;
+}
