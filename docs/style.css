@@ -215,6 +215,6 @@ a{
 }
 
 .gm-ui-hover-effect {
-  height: 20px;
+  height: 20px !important;
   overflow: hidden;
 }
